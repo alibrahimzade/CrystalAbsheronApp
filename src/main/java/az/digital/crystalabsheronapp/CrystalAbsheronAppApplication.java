@@ -1,0 +1,13 @@
+package az.digital.crystalabsheronapp;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class CrystalAbsheronAppApplication {
+
+    public static void main(String[] args) {
+        SpringApplication.run(CrystalAbsheronAppApplication.class, args);
+    }
+
+}
