@@ -23,6 +23,7 @@ public class RegisterResponse {
                 .name(userEntity.getName())
                 .surname(userEntity.getSurname())
                 .fatherName(userEntity.getFatherName())
+                .fin(userEntity.getFin())
                 .password(userEntity.getPassword())
                 .role(userEntity.getRole())
                 .build();
