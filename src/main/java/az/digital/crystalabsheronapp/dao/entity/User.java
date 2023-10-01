@@ -21,7 +21,7 @@ import java.util.List;
 @Table(name = "t-user")
 public class User implements UserDetails {
     @Id
-    @Column(name = "id", nullable = false)
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
@@ -32,7 +32,9 @@ public class User implements UserDetails {
     String fatherName;
 
     String fin;
+
     String password;
+
     @Enumerated(EnumType.STRING)
     Role role;
 
@@ -40,8 +42,9 @@ public class User implements UserDetails {
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority(role.name()));
     }
+
     @Override
-    public String getPassword(){
+    public String getPassword() {
         return password;
     }
 
