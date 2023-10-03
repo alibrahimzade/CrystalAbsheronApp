@@ -2,6 +2,7 @@ package az.digital.crystalabsheronapp.dao.entity;
 
 import az.digital.crystalabsheronapp.enums.Blocks;
 import az.digital.crystalabsheronapp.enums.Payments;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -37,20 +38,25 @@ public class Building {
     Double firstPayment;
 
     Integer floor;
-
+    @Enumerated(EnumType.STRING)
     Payments done;
 
     String description;
 
     @Column(name = "zamin")
     String guarantor;
-
+    @Enumerated(EnumType.STRING)
     Blocks block;
 
     Double interestRate;
 
     @Column(name = "odenish muddeti")
     String period;
+
+    @ManyToOne
+    @JoinColumn(name = "residence_id",nullable = false)
+    @JsonIgnore
+    Residence residence;
 
 
 }

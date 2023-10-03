@@ -1,6 +1,6 @@
 package az.digital.crystalabsheronapp.enums;
 
-public enum Building {
+public enum Status {
     KREDIT, SATILIB, IPOTEKA, BOSH
 }
 

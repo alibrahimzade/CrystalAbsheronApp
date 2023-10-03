@@ -2,6 +2,8 @@ package az.digital.crystalabsheronapp.dto;
 
 import az.digital.crystalabsheronapp.enums.Blocks;
 import az.digital.crystalabsheronapp.enums.Payments;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
@@ -27,13 +29,13 @@ public class BuildingDto {
     Double firstPayment;
 
     Integer floor;
-
+    @Enumerated(EnumType.STRING)
     Payments done;
 
     String description;
 
     String guarantor;
-
+    @Enumerated(EnumType.STRING)
     Blocks block;
 
     Double interestRate;

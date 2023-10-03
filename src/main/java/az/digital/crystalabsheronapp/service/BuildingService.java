@@ -21,12 +21,9 @@ import static org.springframework.http.HttpStatus.NOT_FOUND;
 public class BuildingService {
 
     private final BuildingRepository buildingRepository;
-    BuildingMapper buildingMapper;
-
 
     public ResponseEntity<List<Building>> getAllBuilding() {
         return ResponseEntity.status(HttpStatus.OK).body(buildingRepository.findAll());
-
     }
 
     public ResponseEntity<?> getBuildingById(Long id) {
@@ -38,7 +35,6 @@ public class BuildingService {
     }
 
     public void createBuilding(BuildingDto buildingDto) {
-
         buildingRepository.save(BuildingMapper.BUILDING_MAPPER.buildDtoToEntity(buildingDto));
     }
 
@@ -48,9 +44,7 @@ public class BuildingService {
             Building update = BuildingMapper.BUILDING_MAPPER.buildDtoToEntity(buildingDto);
             return ResponseEntity.ok(buildingRepository.save(update));
         }
-
         return ResponseEntity.status(NOT_FOUND).body("BUILDING NOT FOUND");
-
     }
 
     public ResponseEntity<?> deleteBuilding(Long id) {
@@ -60,6 +54,5 @@ public class BuildingService {
             return ResponseEntity.ok(DELETED);
         }
         return ResponseEntity.status(NOT_FOUND).body("THIS BUILDING IS NOT EXIST");
-
     }
 }
