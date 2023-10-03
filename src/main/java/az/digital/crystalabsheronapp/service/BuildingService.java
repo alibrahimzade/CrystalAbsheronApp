@@ -1,7 +1,9 @@
 package az.digital.crystalabsheronapp.service;
 
 import az.digital.crystalabsheronapp.dao.entity.Building;
+import az.digital.crystalabsheronapp.dao.entity.Residence;
 import az.digital.crystalabsheronapp.dao.repository.BuildingRepository;
+import az.digital.crystalabsheronapp.dao.repository.ResidenceRepository;
 import az.digital.crystalabsheronapp.dto.BuildingDto;
 import az.digital.crystalabsheronapp.mapper.BuildingMapper;
 import lombok.RequiredArgsConstructor;
@@ -21,6 +23,7 @@ import static org.springframework.http.HttpStatus.NOT_FOUND;
 public class BuildingService {
 
     private final BuildingRepository buildingRepository;
+    private final ResidenceRepository residenceRepository;
 
     public ResponseEntity<List<Building>> getAllBuilding() {
         return ResponseEntity.status(HttpStatus.OK).body(buildingRepository.findAll());
@@ -41,10 +44,30 @@ public class BuildingService {
     public ResponseEntity<?> updateBuilder(Long buildingId, BuildingDto buildingDto) {
         Building building = buildingRepository.findById(buildingId).orElseGet(null);
         if (Objects.nonNull(building)) {
-            Building update = BuildingMapper.BUILDING_MAPPER.buildDtoToEntity(buildingDto);
-            return ResponseEntity.ok(buildingRepository.save(update));
+            Residence residence = residenceRepository.findById(buildingDto.getResidenceId()).orElseGet(null);
+            if (Objects.nonNull(residence)) {
+                Building update = BuildingMapper.BUILDING_MAPPER.buildDtoToEntity(buildingDto);
+                update.setPrice(buildingDto.getPrice());
+                update.setPiecePrice(buildingDto.getPiecePrice());
+                update.setHouseOwner(buildingDto.getHouseOwner());
+                update.setArea(buildingDto.getArea());
+                update.setNumberOfRooms(buildingDto.getNumberOfRooms());
+                update.setMonthlyPayment(buildingDto.getMonthlyPayment());
+                update.setFirstPayment(buildingDto.getFirstPayment());
+                update.setFloor(buildingDto.getFloor());
+                update.setDone(buildingDto.getDone());
+                update.setDescription(buildingDto.getDescription());
+                update.setGuarantor(buildingDto.getGuarantor());
+                update.setBlock(buildingDto.getBlock());
+                update.setInterestRate(buildingDto.getInterestRate());
+                update.setPeriod(buildingDto.getPeriod());
+                update.setResidence(residence);
+                return ResponseEntity.ok(buildingRepository.save(update));
+            }
+            return ResponseEntity.status(NOT_FOUND).body("Residence NOT FOUND");
         }
-        return ResponseEntity.status(NOT_FOUND).body("THIS USER IS NOT FOUND");
+        return ResponseEntity.status(NOT_FOUND).body("BUILDING NOT FOUND");
+
     }
 
     public ResponseEntity<?> deleteBuilding(Long id) {
