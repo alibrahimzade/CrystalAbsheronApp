@@ -37,8 +37,8 @@ public class BuildingService {
         return ResponseEntity.status(NOT_FOUND).body("THIS BUILDING IS NOT EXIST");
     }
 
-    public void createBuilding(BuildingDto buildingDto) {
-        buildingRepository.save(BuildingMapper.BUILDING_MAPPER.buildDtoToEntity(buildingDto));
+    public ResponseEntity<?> createBuilding(BuildingDto buildingDto) {
+       return ResponseEntity.ok(buildingRepository.save(BuildingMapper.BUILDING_MAPPER.buildDtoToEntity(buildingDto)));
     }
 
     public ResponseEntity<?> updateBuilder(Long buildingId, BuildingDto buildingDto) {

@@ -36,7 +36,7 @@ public class BuildingController {
     }
 
     @PostMapping("/createdBuilding")
-    public void saveBuilding(@RequestBody BuildingDto buildingDto){
-        buildingService.createBuilding(buildingDto);
+    public ResponseEntity<?> saveBuilding(@RequestBody BuildingDto buildingDto) {
+        return buildingService.createBuilding(buildingDto);
     }
 }
