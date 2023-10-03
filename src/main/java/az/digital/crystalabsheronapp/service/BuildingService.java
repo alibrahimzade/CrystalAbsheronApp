@@ -76,6 +76,6 @@ public class BuildingService {
             buildingRepository.deleteById(id);
             return ResponseEntity.ok(DELETED);
         }
-        return ResponseEntity.status(NOT_FOUND).body("THIS BUILDING IS NOT EXIST");
+        return ResponseEntity.status(NOT_FOUND).body("THIS BUILDING DOES NOT EXIST");
     }
 }
