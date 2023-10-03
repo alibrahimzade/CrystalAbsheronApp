@@ -1,10 +1,13 @@
 package az.digital.crystalabsheronapp.controller;
 
+import az.digital.crystalabsheronapp.dao.entity.Building;
 import az.digital.crystalabsheronapp.dto.BuildingDto;
 import az.digital.crystalabsheronapp.service.BuildingService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -14,7 +17,7 @@ public class BuildingController {
     private final BuildingService buildingService;
 
     @GetMapping("/getAll")
-    public ResponseEntity<?> getAllBuildings() {
+    public ResponseEntity<List<Building>> getAllBuildings() {
         return buildingService.getAllBuilding();
     }
 
@@ -30,7 +33,7 @@ public class BuildingController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<?> deleteById(Long id) {
+    public ResponseEntity<?> deleteById(@PathVariable(name = "id") Long id) {
         return buildingService.deleteBuilding(id);
 
     }

@@ -11,6 +11,11 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 import java.util.List;
 
+@NamedQuery( name = "User.getAllUsers",
+query = "select new az.digital.crystalabsheronapp.wrapper.UserWrapper" +
+        "(u.id, u.name, u.surname,u.fatherName,u.fin,u.password,u.role)from User u ")
+
+
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor

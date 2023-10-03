@@ -2,19 +2,17 @@ package az.digital.crystalabsheronapp.mapper;
 
 import az.digital.crystalabsheronapp.dao.entity.Residence;
 import az.digital.crystalabsheronapp.dto.ResidenceDto;
+import org.mapstruct.Mapper;
+import org.mapstruct.ReportingPolicy;
 
-public enum ResidenceMapper {
-    RESIDENCE_MAPPER;
+@Mapper(componentModel = "spring",
+        unmappedSourcePolicy = ReportingPolicy.IGNORE,
+        unmappedTargetPolicy = ReportingPolicy.IGNORE)
+public interface ResidenceMapper {
 
-    public final Residence buildDtoToEntity(ResidenceDto residenceDto){
-        return Residence.builder()
-                .name(residenceDto.getName())
-                .build();
-    }
+    ResidenceDto fromEntityToDto(Residence residence);
 
-    public final ResidenceDto buildEntityToDto(Residence residence){
-        return ResidenceDto.builder()
-                .name(residence.getName())
-                .build();
-    }
+    Residence fromDtoToEntity(ResidenceDto residenceDto);
+
+
 }

@@ -42,22 +42,22 @@ public class BuildingResponse {
     String period;
 
 
-    public static BuildingResponse buildingRegisterDto(Building buildingEntity){
-        return BuildingResponse.builder()
-                .price(buildingEntity.getPrice())
-                .piecePrice(buildingEntity.getPiecePrice())
-                .houseOwner(buildingEntity.getHouseOwner())
-                .area(buildingEntity.getArea())
-                .numberOfRooms(buildingEntity.getNumberOfRooms())
-                .monthlyPayment(buildingEntity.getMonthlyPayment())
-                .firstPayment(buildingEntity.getFirstPayment())
-                .floor(buildingEntity.getFloor())
-                .done(buildingEntity.getDone())
-                .description(buildingEntity.getDescription())
-                .guarantor(buildingEntity.getGuarantor())
-                .block(buildingEntity.getBlock())
-                .interestRate(buildingEntity.getInterestRate())
-                .period(buildingEntity.getPeriod())
-                .build();
-    }
+//    public static BuildingResponse buildingRegisterDto(Building buildingEntity){
+//        return BuildingResponse.builder()
+//                .price(buildingEntity.getPrice())
+//                .piecePrice(buildingEntity.getPiecePrice())
+//                .houseOwner(buildingEntity.getHouseOwner())
+//                .area(buildingEntity.getArea())
+//                .numberOfRooms(buildingEntity.getNumberOfRooms())
+//                .monthlyPayment(buildingEntity.getMonthlyPayment())
+//                .firstPayment(buildingEntity.getFirstPayment())
+//                .floor(buildingEntity.getFloor())
+//                .done(buildingEntity.getDone())
+//                .description(buildingEntity.getDescription())
+//                .guarantor(buildingEntity.getGuarantor())
+//                .block(buildingEntity.getBlock())
+//                .interestRate(buildingEntity.getInterestRate())
+//                .period(buildingEntity.getPeriod())
+//                .build();
+//    }
 }

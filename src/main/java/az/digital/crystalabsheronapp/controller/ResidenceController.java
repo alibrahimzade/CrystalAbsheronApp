@@ -10,7 +10,10 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 @RequestMapping("/residence")
 public class ResidenceController {
+
     private final ResidenceService residenceService;
+
+
     @GetMapping("/getResidence{id}")
     public ResponseEntity<?> getResidence(@PathVariable(name = "id") Long id){
         return ResponseEntity.ok(residenceService.findResidenceById(id));
