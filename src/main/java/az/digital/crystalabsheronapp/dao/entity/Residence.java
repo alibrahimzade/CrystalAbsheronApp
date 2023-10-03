@@ -6,6 +6,11 @@ import lombok.experimental.FieldDefaults;
 
 import java.util.List;
 
+@NamedQuery( name = "Residence.getAllResidences",
+        query = "select new az.digital.crystalabsheronapp.wrapper.ResidenceWrapper" +
+                "(u.id, u.name)from Residence u ")
+
+
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
