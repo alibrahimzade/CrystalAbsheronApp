@@ -44,7 +44,7 @@ public class BuildingService {
             Building update = BuildingMapper.BUILDING_MAPPER.buildDtoToEntity(buildingDto);
             return ResponseEntity.ok(buildingRepository.save(update));
         }
-        return ResponseEntity.status(NOT_FOUND).body("BUILDING NOT FOUND");
+        return ResponseEntity.status(NOT_FOUND).body("THIS USER IS NOT FOUND");
     }
 
     public ResponseEntity<?> deleteBuilding(Long id) {
@@ -53,6 +53,6 @@ public class BuildingService {
             buildingRepository.deleteById(id);
             return ResponseEntity.ok(DELETED);
         }
-        return ResponseEntity.status(NOT_FOUND).body("THIS BUILDING IS NOT EXIST");
+        return ResponseEntity.status(NOT_FOUND).body("THIS BUILDING DOES NOT EXIST");
     }
 }
