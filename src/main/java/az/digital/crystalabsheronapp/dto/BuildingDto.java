@@ -41,4 +41,6 @@ public class BuildingDto {
     Double interestRate;
 
     String period;
+
+    Long residenceId;
 }
