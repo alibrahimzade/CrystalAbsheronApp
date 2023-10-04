@@ -1,7 +1,9 @@
 package az.digital.crystalabsheronapp.dto;
 
+import az.digital.crystalabsheronapp.dao.entity.Residence;
 import az.digital.crystalabsheronapp.enums.Blocks;
 import az.digital.crystalabsheronapp.enums.Payments;
+import jakarta.persistence.Column;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import lombok.*;
@@ -43,6 +45,5 @@ public class BuildingDto {
     Double interestRate;
 
     String period;
-
     Long residenceId;
 }
