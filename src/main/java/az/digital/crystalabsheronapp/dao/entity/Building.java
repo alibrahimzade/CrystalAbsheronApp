@@ -21,7 +21,6 @@ public class Building {
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
-
     Double price;
 
     @Column(name = "1m qiymet")
@@ -54,9 +53,8 @@ public class Building {
     String period;
 
     @ManyToOne
-    @JoinColumn(name = "residence_id",nullable = false)
+    @JoinColumn(name = "residence_id", nullable = false)
     @JsonIgnore
     Residence residence;
-
 
 }

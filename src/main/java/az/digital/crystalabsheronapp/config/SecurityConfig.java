@@ -25,6 +25,7 @@ public class SecurityConfig {
                 .requestMatchers("/auth/**","/auth/authenticate","/auth/register").permitAll()
                 .requestMatchers("/building/**").permitAll()
                 .requestMatchers("/user/**").permitAll()
+                .requestMatchers("/residence/**").permitAll()
                 .anyRequest()
                 .authenticated()
                 .and()

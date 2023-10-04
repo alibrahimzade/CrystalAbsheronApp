@@ -3,6 +3,7 @@ package az.digital.crystalabsheronapp.service;
 import az.digital.crystalabsheronapp.dao.entity.Residence;
 import az.digital.crystalabsheronapp.dao.repository.ResidenceRepository;
 import az.digital.crystalabsheronapp.dto.ResidenceDto;
+import az.digital.crystalabsheronapp.exceptions.NoSuchResidence;
 import az.digital.crystalabsheronapp.mapper.ResidenceMapper;
 import az.digital.crystalabsheronapp.wrapper.ResidenceWrapper;
 import lombok.RequiredArgsConstructor;
@@ -23,43 +24,43 @@ public class ResidenceService {
     private final ResidenceRepository repository;
     private final ResidenceMapper residenceMapper;
 
-    public ResponseEntity<ResidenceDto> findResidenceById(Long id){
-        Residence residence = repository.findById(id).orElseGet(null);
-        if (Objects.nonNull(residence)){
+    public ResponseEntity<ResidenceDto> findResidenceById(Long id) {
+        Residence residence = repository.findById(id).orElseThrow(() -> new NoSuchResidence("The residence in " + id + " does not exist"));
+        if (Objects.nonNull(residence)) {
             return ResponseEntity.ok(residenceMapper.fromEntityToDto(residence));
         }
 
         return ResponseEntity.status(NOT_FOUND).build();
     }
 
-    public ResponseEntity<List<ResidenceWrapper>> findAllResidences(){
+    public ResponseEntity<List<ResidenceWrapper>> findAllResidences() {
         return ResponseEntity.status(HttpStatus.OK).body(repository.getAllResidences());
     }
 
-    public ResponseEntity<ResidenceDto> createResidence(ResidenceDto residenceDto){
-        Residence residenceName = repository.getResidenceByName(residenceDto.getName()).orElseGet(null);
-        if (Objects.isNull(residenceName)){
+    public ResponseEntity<?> createResidence(ResidenceDto residenceDto) {
+        Residence residenceName = repository.getResidenceByName(residenceDto.getName()).orElseGet(() -> null);
+        if (Objects.isNull(residenceName)) {
             Residence residence = residenceMapper.fromDtoToEntity(residenceDto);
             repository.save(residence);
-            return ResponseEntity.status(OK).body(residenceMapper.fromEntityToDto(repository.save(residence)));
+            return ResponseEntity.status(OK).body("The Residence created");
         }
-        return ResponseEntity.status(NOT_FOUND).build();
+        return ResponseEntity.status(BAD_REQUEST).body("This residence already exist");
+    }
 
-    public ResponseEntity<?> updateResidence(Long residenceId, ResidenceDto residenceDto){
-        Residence residence = repository.findById(residenceId).orElseGet(null);
-        if (Objects.nonNull(residence)){
-            Residence updated = ResidenceMapper.RESIDENCE_MAPPER.buildDtoToEntity(residenceDto);
-            updated.setName(residenceDto.getName());
-            repository.save(updated);
+    public ResponseEntity<?> updateResidence(Long residenceId, ResidenceDto residenceDto) {
+        Residence residence = repository.findById(residenceId).orElseThrow(() -> new NoSuchResidence("The residence  does not exist"));
+        if (Objects.nonNull(residence)) {
+            residence.setName(residenceDto.getName());
+            repository.save(residence);
             return ResponseEntity.ok(SAVING);
         }
 
         return ResponseEntity.status(NOT_FOUND).body("This Residence does not exist");
     }
 
-    public ResponseEntity<?> deleteResidenceById(Long id){
-        Residence residence = repository.findById(id).orElseGet(null);
-        if (Objects.nonNull(residence)){
+    public ResponseEntity<?> deleteResidenceById(Long id) {
+        Residence residence = repository.findById(id).orElseThrow(() -> new NoSuchResidence("The residence in " + id + " does not exist"));
+        if (Objects.nonNull(residence)) {
             repository.deleteById(id);
             return ResponseEntity.ok(DELETED);
         }
