@@ -45,6 +45,7 @@ public class BuildingService {
         Residence residence = residenceRepository.findById(buildingDto.getResidenceId()).orElseThrow(() -> new NoSuchResidence("The residence in " + buildingDto.getResidenceId() + " does not exist"));
         if (Objects.nonNull(residence)){
         Building building = buildingMapper.fromDtoToEntity(buildingDto);
+            building.setResidence(residenceRepository.findById(buildingDto.getResidenceId()).get());
         buildingRepository.save(building);
         return ResponseEntity.status(OK).body("the building created");
         }
