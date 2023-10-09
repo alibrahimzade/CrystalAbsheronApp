@@ -13,3 +13,4 @@ public class ChatMessage {
     private String sender;
     private MessageType type;
 }
+

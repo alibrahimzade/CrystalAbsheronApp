@@ -1,7 +1,7 @@
 package az.digital.crystalabsheronapp.controller;
 
 import az.digital.crystalabsheronapp.dao.entity.Information;
-import az.digital.crystalabsheronapp.dao.entity.ResponseDTO;
+import az.digital.crystalabsheronapp.dto.ResponseDTO;
 import az.digital.crystalabsheronapp.service.InformationService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
