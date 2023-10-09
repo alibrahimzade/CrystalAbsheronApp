@@ -28,6 +28,7 @@ public class SecurityConfig {
                 .requestMatchers("/building/**").permitAll()
                 .requestMatchers("/user/**").permitAll()
                 .requestMatchers("/residence/**").permitAll()
+                .requestMatchers("/mail/**").permitAll()
                 .requestMatchers("/api/information/**").permitAll()
                 .requestMatchers("/chat/**").permitAll()
                 .anyRequest()
