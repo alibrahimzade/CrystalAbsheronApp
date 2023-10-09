@@ -2,12 +2,12 @@ package az.digital.crystalabsheronapp.service;
 
 import az.digital.crystalabsheronapp.dao.entity.Mail;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
-
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class EmailService {
@@ -26,7 +26,7 @@ public class EmailService {
         message.setSubject(mail.getSubject());
 
         javaMailSender.send(message);
-        System.out.println("Mail Sent Successfully...");
+        log.info("Mail Sent Successfully...");
 
     }
 }
