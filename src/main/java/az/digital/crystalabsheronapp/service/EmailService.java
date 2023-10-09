@@ -1,12 +1,11 @@
 package az.digital.crystalabsheronapp.service;
 
-import az.digital.crystalabsheronapp.dao.entity.Information;
-import jakarta.mail.internet.MimeMessage;
+import az.digital.crystalabsheronapp.dao.entity.Mail;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -16,58 +15,18 @@ public class EmailService {
     @Value("${spring.mail.username}")
     private String fromEmail;
 
-
     private final JavaMailSender javaMailSender;
 
-    public void sendMail(Information info) {
-        try {
-            MimeMessage mimeMessage1 = javaMailSender.createMimeMessage();
+    public void sendMail(Mail mail) {
 
-            MimeMessageHelper mimeMessageHelper1 = new MimeMessageHelper(mimeMessage1, true);
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setFrom("huseynliss18@gmail.com");
+        message.setTo(mail.getToMail());
+        message.setText(mail.getBody());
+        message.setSubject(mail.getSubject());
 
-            mimeMessageHelper1.setFrom(fromEmail);
-            mimeMessageHelper1.setTo(info.getEmail());
-            mimeMessageHelper1.setSubject("Consultation registration");
-            mimeMessageHelper1.setText("Dear " + info.getFirstName() + ", your consultation registration has been completed successfully.");
-            javaMailSender.send(mimeMessage1);
+        javaMailSender.send(message);
+        System.out.println("Mail Sent Successfully...");
 
-            MimeMessage mimeMessage2 = javaMailSender.createMimeMessage();
-            MimeMessageHelper mimeMessageHelper2 = new MimeMessageHelper(mimeMessage2, true);
-
-            mimeMessageHelper2.setFrom(fromEmail);
-            mimeMessageHelper2.setTo(fromEmail);
-            mimeMessageHelper2.setSubject("New Consultation registration!");
-            mimeMessageHelper2.setText(
-                    String.format("""
-                                        New Consultation Notification!
-                                        Ad: %s,
-                                        Yash: %s,
-                                        Nomre: %s,
-                                        Email: %s,
-                                        Sahe: %s,
-                                        Alt sahe: %s,
-                                        Niye biz? %s,
-                                        Elaqe nece? %s,
-                                        Elaqe zaman? %s,
-                                        Serh & irad? %s
-                                    """,
-                            info.getFirstName(),
-                            info.getAge(),
-                            info.getPhone(),
-                            info.getEmail(),
-                            info.getField(),
-                            info.getFieldSpec(),
-                            info.getWhyUs(),
-                            info.getHowContact(),
-                            info.getDateContact(),
-                            info.getFeedback()
-                    )
-            );
-
-            javaMailSender.send(mimeMessage2);
-
-        } catch (Exception e) {
-            throw new RuntimeException("Failed to send mail: " + e.getMessage(), e);
-        }
     }
 }
