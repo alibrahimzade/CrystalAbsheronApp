@@ -22,7 +22,7 @@ public class BuildingController {
     }
 
     @GetMapping("/getById/{id}")
-    public ResponseEntity<?> getBuildingById(@PathVariable(name = "id") Long id) {
+    public ResponseEntity<?> getBuildingById(@PathVariable(name = "id") Long id)    {
         return buildingService.getBuildingById(id);
     }
 
@@ -42,4 +42,16 @@ public class BuildingController {
     public ResponseEntity<?> saveBuilding(@RequestBody BuildingDto buildingDto) {
         return buildingService.createBuilding(buildingDto);
     }
+
+    @PostMapping("/makePayment/{buildingId}")
+    public ResponseEntity<?> makeMonthlyPayment(@RequestParam double paymentAmount,
+                                                @PathVariable(name = "buildingId")Long id){
+        return buildingService.makeMonthlyPayment(id,paymentAmount);
+    }
+    @PostMapping("/firstPayment/{buildingId}")
+        public ResponseEntity<?> makeFirstPayment(@RequestParam double firstPayment,
+                                                    @PathVariable(name = "buildingId") Long id){
+            return buildingService.makeFirstPayment(id,firstPayment);
+        }
+
 }

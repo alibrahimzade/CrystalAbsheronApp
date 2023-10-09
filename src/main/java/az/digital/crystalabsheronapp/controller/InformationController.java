@@ -8,7 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/informations")
+@RequestMapping("/api/information")
 @CrossOrigin(origins = "*")
 public class InformationController {
 
