@@ -21,6 +21,7 @@ public class BuildingDto {
     Double price;
 
     Double piecePrice;
+    Double debt;
 
     String houseOwner;
 
