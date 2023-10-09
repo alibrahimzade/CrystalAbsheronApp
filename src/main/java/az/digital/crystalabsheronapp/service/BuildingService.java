@@ -5,6 +5,7 @@ import az.digital.crystalabsheronapp.dao.entity.Residence;
 import az.digital.crystalabsheronapp.dao.repository.BuildingRepository;
 import az.digital.crystalabsheronapp.dao.repository.ResidenceRepository;
 import az.digital.crystalabsheronapp.dto.BuildingDto;
+import az.digital.crystalabsheronapp.enums.Status;
 import az.digital.crystalabsheronapp.exceptions.NoSuchBuilding;
 import az.digital.crystalabsheronapp.exceptions.NoSuchResidence;
 import az.digital.crystalabsheronapp.mapper.BuildingMapper;
@@ -48,7 +49,8 @@ public class BuildingService {
                 orElseThrow(() -> new NoSuchResidence("The residence in " + buildingDto.getResidenceId() + " does not exist"));
         if (Objects.nonNull(residence)){
         Building building = buildingMapper.fromDtoToEntity(buildingDto);
-            building.setResidence(residenceRepository.findById(buildingDto.getResidenceId()).get());
+        building.setResidence(residenceRepository.findById(buildingDto.getResidenceId()).get());
+        building.setStatus(Status.BOSH);
         buildingRepository.save(building);
         return ResponseEntity.status(OK).body("the building created");
         }
@@ -71,6 +73,7 @@ public class BuildingService {
                 building.setMonthlyPayment(buildingDto.getMonthlyPayment());
                 building.setFirstPayment(buildingDto.getFirstPayment());
                 building.setFloor(buildingDto.getFloor());
+                building.setStatus(buildingDto.getStatus());
                 building.setDone(buildingDto.getDone());
                 building.setDescription(buildingDto.getDescription());
                 building.setGuarantor(buildingDto.getGuarantor());
@@ -81,6 +84,17 @@ public class BuildingService {
                 return ResponseEntity.ok(SAVING);
             }
             return ResponseEntity.status(NOT_FOUND).body("This Residence does not exist.");
+        }
+        return ResponseEntity.status(NOT_FOUND).build();
+    }
+
+    public ResponseEntity<?> changeStatus(Long id, BuildingDto buildingDto){
+        Building building = buildingRepository.findById(id).
+                orElseThrow(() -> new NoSuchBuilding("The Building in " + id + " does not exist"));
+        if (Objects.nonNull(building)){
+            building.setStatus(buildingDto.getStatus());
+            buildingRepository.save(building);
+            return ResponseEntity.ok(SAVING);
         }
         return ResponseEntity.status(NOT_FOUND).build();
     }

@@ -2,6 +2,7 @@ package az.digital.crystalabsheronapp.dao.entity;
 
 import az.digital.crystalabsheronapp.enums.Blocks;
 import az.digital.crystalabsheronapp.enums.Payments;
+import az.digital.crystalabsheronapp.enums.Status;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
@@ -38,6 +39,8 @@ public class Building {
     Double firstPayment;
 
     Integer floor;
+    @Enumerated(EnumType.STRING)
+    Status status;
     @Enumerated(EnumType.STRING)
     Payments done;
 
