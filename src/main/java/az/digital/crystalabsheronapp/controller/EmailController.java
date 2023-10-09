@@ -19,8 +19,7 @@ public class EmailController {
     private final EmailService emailService;
 
     @PostMapping("/sendMail")
-    public ResponseEntity<?> sendMail(@RequestBody Mail mail) {
+    public void sendMail(@RequestBody Mail mail) {
         emailService.sendMail(mail);
-        return ResponseEntity.status(OK).build();
     }
 }
