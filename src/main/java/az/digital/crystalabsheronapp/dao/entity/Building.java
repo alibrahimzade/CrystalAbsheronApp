@@ -25,6 +25,7 @@ public class Building {
 
     @Column(name = "1m qiymet")
     Double piecePrice;
+    Double debt;
 
     String houseOwner;
 

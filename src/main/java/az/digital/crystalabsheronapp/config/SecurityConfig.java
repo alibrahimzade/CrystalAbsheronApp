@@ -26,6 +26,7 @@ public class SecurityConfig {
                 .requestMatchers("/building/**").permitAll()
                 .requestMatchers("/user/**").permitAll()
                 .requestMatchers("/residence/**").permitAll()
+                .requestMatchers("/api/information/**").permitAll()
                 .anyRequest()
                 .authenticated()
                 .and()

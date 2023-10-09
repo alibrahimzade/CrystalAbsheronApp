@@ -1,5 +1,6 @@
 package az.digital.crystalabsheronapp.chat;
 
+import az.digital.crystalabsheronapp.chat.MessageType;
 import lombok.*;
 
 @Getter
@@ -8,9 +9,8 @@ import lombok.*;
 @NoArgsConstructor
 @Builder
 public class ChatMessage {
-
-    private MessageType type;
     private String content;
     private String sender;
-
+    private MessageType type;
 }
+
