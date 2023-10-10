@@ -31,6 +31,10 @@ public class BuildingController {
         return ResponseEntity.ok(buildingService.updateBuilder(buildingId, buildingDto));
 
     }
+    @PutMapping("/changeStatus/{id}")
+    public ResponseEntity<?> changeStatus(@PathVariable Long id, @RequestBody BuildingDto buildingDto){
+        return ResponseEntity.ok(buildingService.changeStatus(id,buildingDto));
+    }
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> deleteById(@PathVariable(name = "id") Long id) {
@@ -42,6 +46,7 @@ public class BuildingController {
     public ResponseEntity<?> saveBuilding(@RequestBody BuildingDto buildingDto) {
         return buildingService.createBuilding(buildingDto);
     }
+
 
     @PostMapping("/makePayment/{buildingId}")
     public ResponseEntity<?> makeMonthlyPayment(@RequestParam double paymentAmount,

@@ -2,6 +2,8 @@ package az.digital.crystalabsheronapp.dto;
 
 import az.digital.crystalabsheronapp.enums.Blocks;
 import az.digital.crystalabsheronapp.enums.Payments;
+
+import az.digital.crystalabsheronapp.enums.Status;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import lombok.*;
@@ -34,6 +36,8 @@ public class BuildingDto {
     Double firstPayment;
 
     Integer floor;
+    @Enumerated(EnumType.STRING)
+    Status status;
     @Enumerated(EnumType.STRING)
     Payments done;
 
