@@ -1,13 +1,13 @@
 package az.digital.crystalabsheronapp.dto;
 
-import az.digital.crystalabsheronapp.dao.entity.Residence;
 import az.digital.crystalabsheronapp.enums.Blocks;
 import az.digital.crystalabsheronapp.enums.Payments;
-import jakarta.persistence.Column;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
+
+import java.time.LocalDate;
 
 @Data
 @AllArgsConstructor
@@ -47,4 +47,7 @@ public class BuildingDto {
 
     String period;
     Long residenceId;
+
+     LocalDate createdTime;
+
 }
