@@ -8,6 +8,9 @@ import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
@@ -60,5 +63,7 @@ public class Building {
     @JoinColumn(name = "residence_id", nullable = false)
     @JsonIgnore
     Residence residence;
+
+    LocalDate createdTime;
 
 }
