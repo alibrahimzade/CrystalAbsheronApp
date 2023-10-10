@@ -5,6 +5,7 @@ import az.digital.crystalabsheronapp.dao.entity.Residence;
 import az.digital.crystalabsheronapp.dao.repository.BuildingRepository;
 import az.digital.crystalabsheronapp.dao.repository.ResidenceRepository;
 import az.digital.crystalabsheronapp.dto.BuildingDto;
+import az.digital.crystalabsheronapp.enums.Payments;
 import az.digital.crystalabsheronapp.enums.Status;
 import az.digital.crystalabsheronapp.exceptions.NoSuchBuilding;
 import az.digital.crystalabsheronapp.exceptions.NoSuchResidence;
@@ -14,6 +15,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -73,7 +75,6 @@ public class BuildingService {
                 building.setMonthlyPayment(buildingDto.getMonthlyPayment());
                 building.setFirstPayment(buildingDto.getFirstPayment());
                 building.setFloor(buildingDto.getFloor());
-                building.setStatus(buildingDto.getStatus());
                 building.setDone(buildingDto.getDone());
                 building.setDescription(buildingDto.getDescription());
                 building.setGuarantor(buildingDto.getGuarantor());
@@ -94,6 +95,9 @@ public class BuildingService {
         if (Objects.nonNull(building)){
             building.setStatus(buildingDto.getStatus());
             buildingRepository.save(building);
+            if (building.getStatus() == Status.KREDIT || building.getStatus() == Status.IPOTEKA ){
+
+            }
             return ResponseEntity.ok(SAVING);
         }
         return ResponseEntity.status(NOT_FOUND).build();
@@ -118,6 +122,7 @@ public class BuildingService {
                 remainingDebt = 0;
             }
             building.setDebt(remainingDebt);
+            building.setDone(Payments.DONE);
             buildingRepository.save(building);
             return ResponseEntity.ok("Payment successfully made. Remaining debt is "+remainingDebt);
         }else {

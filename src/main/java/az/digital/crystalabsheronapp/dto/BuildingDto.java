@@ -50,8 +50,8 @@ public class BuildingDto {
     Double interestRate;
 
     String period;
+
+    LocalDate createdAt;
+    LocalDate endAt;
     Long residenceId;
-
-     LocalDate createdTime;
-
 }
