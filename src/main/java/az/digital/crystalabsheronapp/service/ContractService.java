@@ -41,15 +41,10 @@ public class ContractService {
     public ResponseEntity<ContractDto> updateContract(ContractDto contractDto) {
         Contract contract = contractRepository.findById(contractDto.getId()).
                 orElseThrow(() -> new ContractNotFound("This Contract does not exist"));
-
         CustomerInfo customerInfo = customerRepository.findById(contractDto.getCustomerInfoId()).
                 orElseThrow(() -> new NoSuchCustomer("The Customer does not exist"));
-        contract.setDetail(contractDto.getDetail());
-        contract.setStatus(contractDto.getStatus());
-        contract.setCloseDate(contractDto.getCloseDate());
-        contract.setCustomerInfo(customerInfo);
-        contractRepository.save(contract);
-        return ResponseEntity.ok(contractMapper.fromEntityToDto(contract));
+        Contract updated = contractMapper.fromDtoToEntity(contractDto);
+        return ResponseEntity.ok(contractMapper.fromEntityToDto(contractRepository.save(updated)));
     }
 
     public ResponseEntity<ContractDto> getContractById(Long contractId) {
