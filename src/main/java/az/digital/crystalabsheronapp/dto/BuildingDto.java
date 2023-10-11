@@ -51,7 +51,7 @@ public class BuildingDto {
 
     String period;
 
-    LocalDate createdAt;
-    LocalDate endAt;
+//    LocalDate createdAt;
+//    LocalDate endAt;
     Long residenceId;
 }
