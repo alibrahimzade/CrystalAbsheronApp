@@ -59,9 +59,9 @@ public class Building {
     @Column(name = "odenish muddeti")
     String period;
 
-    LocalDate createdAt;
-
-    LocalDate endAt;
+//    LocalDate createdAt;
+//
+//    LocalDate endAt;
 
     @ManyToOne
     @JoinColumn(name = "residence_id", nullable = false)

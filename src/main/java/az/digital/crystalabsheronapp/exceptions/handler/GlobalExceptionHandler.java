@@ -16,36 +16,54 @@ import static org.springframework.http.HttpStatus.*;
 @Slf4j
 public class GlobalExceptionHandler {
     @ExceptionHandler(UserNotFoundException.class)
-    public ExceptionDto handle(UserNotFoundException exception){
-        log.error("not found: ",exception);
+    public ExceptionDto handle(UserNotFoundException exception) {
+        log.error("not found: ", exception);
         return new ExceptionDto(NOT_FOUND.value(), exception.getMessage());
     }
+
     @ExceptionHandler(NoSuchBuilding.class)
-    public ExceptionDto handle(NoSuchBuilding exception){
-        log.error("not found: ",exception);
+    public ExceptionDto handle(NoSuchBuilding exception) {
+        log.error("not found: ", exception);
         return new ExceptionDto(BAD_REQUEST.value(), exception.getMessage());
     }
+
     @ExceptionHandler(ResidenceAlreadyExist.class)
-    public ExceptionDto handle(ResidenceAlreadyExist exception){
-        log.error("not found: ",exception);
+    public ExceptionDto handle(ResidenceAlreadyExist exception) {
+        log.error("not found: ", exception);
         return new ExceptionDto(BAD_REQUEST.value(), exception.getMessage());
     }
+
     @ExceptionHandler(NoSuchResidence.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    public ExceptionDto handle(NoSuchResidence exception){
-        log.error("ClientException: ",exception);
+    public ExceptionDto handle(NoSuchResidence exception) {
+        log.error("ClientException: ", exception);
         return new ExceptionDto(NOT_FOUND.value(), exception.getMessage());
     }
 
     @ExceptionHandler(UserAlreadyExist.class)
-    public ExceptionDto handle(UserAlreadyExist exception){
-        log.error("ClientException: ",exception);
-        return new ExceptionDto(CONFLICT.value(),exception.getMessage());
+    public ExceptionDto handle(UserAlreadyExist exception) {
+        log.error("ClientException: ", exception);
+        return new ExceptionDto(CONFLICT.value(), exception.getMessage());
     }
+
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ExceptionDto handle(MethodArgumentNotValidException exception) {
         var fieldError = exception.getFieldErrors().get(0);
         log.error("MethodArgumentNotValidException: ", exception);
         return new ExceptionDto(BAD_REQUEST.value(), exception.getMessage());
+    }
+
+    @ExceptionHandler(ContractNotFound.class)
+    @ResponseStatus(NOT_FOUND)
+    public ExceptionDto handleContractNotFound(ContractNotFound exception) {
+        log.error("handleContractNotFound {}", exception);
+        return new ExceptionDto(NOT_FOUND.value(), exception.getMessage());
+    }
+
+    @ExceptionHandler(NoSuchCustomer.class)
+    @ResponseStatus(NOT_FOUND)
+    public ExceptionDto handleNoSuchCustomerNotFound(NoSuchCustomer exception) {
+        log.error("handleNoSuchCustomerNotFound {}", exception);
+        return new ExceptionDto(NOT_FOUND.value(), exception.getMessage());
     }
 }

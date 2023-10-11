@@ -5,6 +5,7 @@ import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @AllArgsConstructor
@@ -25,5 +26,8 @@ public class CustomerInfo {
     String clientEmail;
     Double amount;
     LocalDate paymentDate;
+
+    @OneToMany(mappedBy = "customerInfo",cascade = CascadeType.ALL)
+    List<Contract> contracts;
 
 }
