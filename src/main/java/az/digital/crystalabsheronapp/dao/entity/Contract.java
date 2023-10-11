@@ -13,7 +13,6 @@ import java.time.LocalDateTime;
         query = "select new az.digital.crystalabsheronapp.wrapper.ContractWrapper" +
                 "(c.id, c.detail,c.status,c.closeDate,c.creationTime,c.customerInfo)from Contract c ")
 
-
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor

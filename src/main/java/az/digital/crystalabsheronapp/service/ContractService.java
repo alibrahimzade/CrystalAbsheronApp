@@ -63,7 +63,7 @@ public class ContractService {
     }
 
     public void deleteContract(Long contractId) {
-        Contract contract = contractRepository.findById(contractId).
+        contractRepository.findById(contractId).
                 orElseThrow(() -> new ContractNotFound("The Contract in " + contractId + " does not exist"));
         contractRepository.deleteById(contractId);
     }
