@@ -32,6 +32,7 @@ public class SecurityConfig {
                 .requestMatchers("/api/information/**").permitAll()
                 .requestMatchers("/chat/**").permitAll()
                 .requestMatchers("/login").permitAll()
+                .requestMatchers("/contract").permitAll()
                 .anyRequest()
                 .authenticated()
                 .and()

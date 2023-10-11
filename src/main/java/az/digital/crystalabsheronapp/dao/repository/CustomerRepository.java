@@ -10,6 +10,6 @@ import java.util.List;
 @Repository
 public interface CustomerRepository extends JpaRepository<CustomerInfo,Long> {
 
-    List<CustomerInfo> findClientsWithPaymentDueIn3Days(LocalDate inThreeDays);
-    List<CustomerInfo> findClientsWithPaymentDueToday();
+ //   List<CustomerInfo> findClientsWithPaymentDueIn3Days(LocalDate inThreeDays);
+//    List<CustomerInfo> findClientsWithPaymentDueToday();
 }
