@@ -26,10 +26,14 @@ public class Contract {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
+    String name;//optional (rovshan??)
+
     String detail;
 
     @Enumerated(EnumType.STRING)
     Payments status;
+
+    boolean hasPaid;
 
 
     @Temporal(TemporalType.TIMESTAMP)
