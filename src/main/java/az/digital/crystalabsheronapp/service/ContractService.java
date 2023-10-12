@@ -24,6 +24,7 @@ public class ContractService {
     private final ContractRepository contractRepository;
     private final ContractMapper contractMapper;
     private final CustomerRepository customerRepository;
+    private final EmailService  emailService;
 
     public ResponseEntity<ContractDto> createdContract(ContractDto contractDto) {
         CustomerInfo customerInfo = customerRepository.findById(contractDto.getCustomerInfoId()).
@@ -31,6 +32,12 @@ public class ContractService {
         Contract contract = contractMapper.fromDtoToEntity(contractDto);
         contract.setCreationTime(LocalDateTime.now());
         contract.setCustomerInfo(customerRepository.findById(contractDto.getCustomerInfoId()).get());
+
+
+
+
+
+
         return ResponseEntity.status(OK).body(contractMapper.fromEntityToDto(contractRepository.save(contract)));
     }
 

@@ -1,9 +1,7 @@
 package az.digital.crystalabsheronapp.controller;
 
-import az.digital.crystalabsheronapp.dao.entity.Contract;
 import az.digital.crystalabsheronapp.dto.ContractDto;
 import az.digital.crystalabsheronapp.service.ContractService;
-import az.digital.crystalabsheronapp.wrapper.ContractWrapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
