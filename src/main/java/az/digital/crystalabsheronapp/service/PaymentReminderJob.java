@@ -21,6 +21,5 @@ public class PaymentReminderJob implements Job {
         for (CustomerInfo customer : customers) {
             emailService.sendMail(customer.getClientEmail(), "Payment notification", "You will be paid in 3 days.");
         }
-
     }
 }

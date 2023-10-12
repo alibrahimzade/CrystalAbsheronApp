@@ -11,6 +11,8 @@ import java.util.List;
 public interface CustomerRepository extends JpaRepository<CustomerInfo,Long> {
     List<CustomerInfo> findAllByPaymentDate(LocalDate thresholdDate);
 
+
+
     //   List<CustomerInfo> findClientsWithPaymentDueIn3Days(LocalDate inThreeDays);
 //    List<CustomerInfo> findClientsWithPaymentDueToday();
 }

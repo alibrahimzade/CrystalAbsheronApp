@@ -9,6 +9,7 @@ import java.util.List;
 
 @Repository
 public interface ContractRepository extends JpaRepository<Contract, Long> {
+    List<Contract> findAllByHasPaid(boolean hasPaid);
 
     List<ContractWrapper> getAllContracts();
 }

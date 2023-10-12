@@ -27,4 +27,7 @@ public class ContractDto {
     LocalDateTime closeDate;
 
     Long customerInfoId;
+
+    boolean hasPaid;
+
 }

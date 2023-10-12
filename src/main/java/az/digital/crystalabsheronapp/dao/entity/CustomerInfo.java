@@ -27,6 +27,7 @@ public class CustomerInfo {
     Double amount;
     LocalDate paymentDate;
 
+
     @OneToMany(mappedBy = "customerInfo",cascade = CascadeType.ALL)
     List<Contract> contracts;
 
