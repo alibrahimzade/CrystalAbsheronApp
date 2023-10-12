@@ -1,5 +1,6 @@
 package az.digital.crystalabsheronapp.controller;
 
+import az.digital.crystalabsheronapp.dao.entity.Contract;
 import az.digital.crystalabsheronapp.dto.ContractDto;
 import az.digital.crystalabsheronapp.service.ContractService;
 import az.digital.crystalabsheronapp.wrapper.ContractWrapper;
@@ -17,7 +18,7 @@ public class ContractController {
     private final ContractService contractService;
 
     @GetMapping("/getAll")
-    public ResponseEntity<List<ContractWrapper>> getAllContracts(){
+    public ResponseEntity<List<ContractDto>> getAllContracts(){
         return contractService.getAllContracts();
     }
 
