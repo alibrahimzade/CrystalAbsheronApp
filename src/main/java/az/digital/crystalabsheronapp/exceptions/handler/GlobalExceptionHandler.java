@@ -7,7 +7,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import static org.springframework.http.HttpStatus.*;
@@ -21,27 +20,27 @@ public class GlobalExceptionHandler {
         return new ExceptionDto(NOT_FOUND.value(), exception.getMessage());
     }
 
-    @ExceptionHandler(NoSuchBuilding.class)
-    public ExceptionDto handle(NoSuchBuilding exception) {
+    @ExceptionHandler(NoSuchBuildingException.class)
+    public ExceptionDto handle(NoSuchBuildingException exception) {
         log.error("not found: ", exception);
         return new ExceptionDto(BAD_REQUEST.value(), exception.getMessage());
     }
 
-    @ExceptionHandler(ResidenceAlreadyExist.class)
-    public ExceptionDto handle(ResidenceAlreadyExist exception) {
+    @ExceptionHandler(ResidenceAlreadyExistException.class)
+    public ExceptionDto handle(ResidenceAlreadyExistException exception) {
         log.error("not found: ", exception);
         return new ExceptionDto(BAD_REQUEST.value(), exception.getMessage());
     }
 
-    @ExceptionHandler(NoSuchResidence.class)
+    @ExceptionHandler(NoSuchResidenceException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    public ExceptionDto handle(NoSuchResidence exception) {
+    public ExceptionDto handle(NoSuchResidenceException exception) {
         log.error("ClientException: ", exception);
         return new ExceptionDto(NOT_FOUND.value(), exception.getMessage());
     }
 
-    @ExceptionHandler(UserAlreadyExist.class)
-    public ExceptionDto handle(UserAlreadyExist exception) {
+    @ExceptionHandler(UserAlreadyExistException.class)
+    public ExceptionDto handle(UserAlreadyExistException exception) {
         log.error("ClientException: ", exception);
         return new ExceptionDto(CONFLICT.value(), exception.getMessage());
     }
@@ -53,16 +52,16 @@ public class GlobalExceptionHandler {
         return new ExceptionDto(BAD_REQUEST.value(), exception.getMessage());
     }
 
-    @ExceptionHandler(ContractNotFound.class)
+    @ExceptionHandler(NoSuchContractException.class)
     @ResponseStatus(NOT_FOUND)
-    public ExceptionDto handleContractNotFound(ContractNotFound exception) {
+    public ExceptionDto handleContractNotFound(NoSuchContractException exception) {
         log.error("handleContractNotFound {}", exception);
         return new ExceptionDto(NOT_FOUND.value(), exception.getMessage());
     }
 
-    @ExceptionHandler(NoSuchCustomer.class)
+    @ExceptionHandler(NoSuchCustomerException.class)
     @ResponseStatus(NOT_FOUND)
-    public ExceptionDto handleNoSuchCustomerNotFound(NoSuchCustomer exception) {
+    public ExceptionDto handleNoSuchCustomerNotFound(NoSuchCustomerException exception) {
         log.error("handleNoSuchCustomerNotFound {}", exception);
         return new ExceptionDto(NOT_FOUND.value(), exception.getMessage());
     }

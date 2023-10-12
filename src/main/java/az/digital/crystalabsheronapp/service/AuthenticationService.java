@@ -3,7 +3,7 @@ package az.digital.crystalabsheronapp.service;
 import az.digital.crystalabsheronapp.dao.entity.User;
 import az.digital.crystalabsheronapp.dao.repository.UserRepository;
 import az.digital.crystalabsheronapp.enums.Role;
-import az.digital.crystalabsheronapp.exceptions.UserAlreadyExist;
+import az.digital.crystalabsheronapp.exceptions.UserAlreadyExistException;
 import az.digital.crystalabsheronapp.exceptions.UserNotFoundException;
 import az.digital.crystalabsheronapp.request.AuthenticationRequest;
 import az.digital.crystalabsheronapp.request.RegisterRequest;
@@ -15,8 +15,6 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.Locale;
-
 @Service
 @RequiredArgsConstructor
 public class AuthenticationService {
@@ -27,7 +25,7 @@ public class AuthenticationService {
     public RegisterResponse register(RegisterRequest request) {
         var exist = userRepo.getUserByFin(request.getFin()).isPresent();
         if (exist) {
-            throw new UserAlreadyExist("User already exist");
+            throw new UserAlreadyExistException("User already exist");
         }
         var user = User.builder()
                 .name(request.getName())

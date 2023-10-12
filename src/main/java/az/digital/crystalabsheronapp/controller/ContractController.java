@@ -17,8 +17,8 @@ public class ContractController {
     private final ContractService contractService;
 
     @GetMapping("/getAll")
-    public ResponseEntity<ResponseEntity<List<ContractWrapper>>> getAllContracts(){
-        return ResponseEntity.ok(contractService.getAllContracts());
+    public ResponseEntity<List<ContractWrapper>> getAllContracts(){
+        return contractService.getAllContracts();
     }
 
     @GetMapping("/getById/{id}")

@@ -3,7 +3,7 @@ package az.digital.crystalabsheronapp.service;
 import az.digital.crystalabsheronapp.dao.entity.Residence;
 import az.digital.crystalabsheronapp.dao.repository.ResidenceRepository;
 import az.digital.crystalabsheronapp.dto.ResidenceDto;
-import az.digital.crystalabsheronapp.exceptions.NoSuchResidence;
+import az.digital.crystalabsheronapp.exceptions.NoSuchResidenceException;
 import az.digital.crystalabsheronapp.mapper.ResidenceMapper;
 import az.digital.crystalabsheronapp.wrapper.ResidenceWrapper;
 import lombok.RequiredArgsConstructor;
@@ -25,7 +25,7 @@ public class ResidenceService {
     private final ResidenceMapper residenceMapper;
 
     public ResponseEntity<ResidenceDto> findResidenceById(Long id) {
-        Residence residence = repository.findById(id).orElseThrow(() -> new NoSuchResidence("The residence in " + id + " does not exist"));
+        Residence residence = repository.findById(id).orElseThrow(() -> new NoSuchResidenceException("The residence in " + id + " does not exist"));
         if (Objects.nonNull(residence)) {
             return ResponseEntity.ok(residenceMapper.fromEntityToDto(residence));
         }
@@ -48,7 +48,7 @@ public class ResidenceService {
     }
 
     public ResponseEntity<?> updateResidence(Long residenceId, ResidenceDto residenceDto) {
-        Residence residence = repository.findById(residenceId).orElseThrow(() -> new NoSuchResidence("The residence  does not exist"));
+        Residence residence = repository.findById(residenceId).orElseThrow(() -> new NoSuchResidenceException("The residence  does not exist"));
         if (Objects.nonNull(residence)) {
             residence.setName(residenceDto.getName());
             repository.save(residence);
@@ -59,7 +59,7 @@ public class ResidenceService {
     }
 
     public ResponseEntity<?> deleteResidenceById(Long id) {
-        Residence residence = repository.findById(id).orElseThrow(() -> new NoSuchResidence("The residence in " + id + " does not exist"));
+        Residence residence = repository.findById(id).orElseThrow(() -> new NoSuchResidenceException("The residence in " + id + " does not exist"));
         if (Objects.nonNull(residence)) {
             repository.deleteById(id);
             return ResponseEntity.ok(DELETED);

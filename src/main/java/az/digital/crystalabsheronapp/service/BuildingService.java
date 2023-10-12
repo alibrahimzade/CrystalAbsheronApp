@@ -7,15 +7,14 @@ import az.digital.crystalabsheronapp.dao.repository.ResidenceRepository;
 import az.digital.crystalabsheronapp.dto.BuildingDto;
 import az.digital.crystalabsheronapp.enums.Payments;
 import az.digital.crystalabsheronapp.enums.Status;
-import az.digital.crystalabsheronapp.exceptions.NoSuchBuilding;
-import az.digital.crystalabsheronapp.exceptions.NoSuchResidence;
+import az.digital.crystalabsheronapp.exceptions.NoSuchBuildingException;
+import az.digital.crystalabsheronapp.exceptions.NoSuchResidenceException;
 import az.digital.crystalabsheronapp.mapper.BuildingMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -39,7 +38,7 @@ public class BuildingService {
 
     public ResponseEntity<BuildingDto> getBuildingById(Long id) {
         Building building = buildingRepository.findById(id).
-                orElseThrow(()->new NoSuchBuilding("The Building in "+id+" does not exist"));
+                orElseThrow(()->new NoSuchBuildingException("The Building in "+id+" does not exist"));
         if (Objects.nonNull(building)) {
             return ResponseEntity.status(OK).body((buildingMapper.fromEntityToDto(building)));
         }
@@ -48,7 +47,7 @@ public class BuildingService {
 
     public ResponseEntity<?> createBuilding(BuildingDto buildingDto) {
         Residence residence = residenceRepository.findById(buildingDto.getResidenceId()).
-                orElseThrow(() -> new NoSuchResidence("The residence in " + buildingDto.getResidenceId() + " does not exist"));
+                orElseThrow(() -> new NoSuchResidenceException("The residence in " + buildingDto.getResidenceId() + " does not exist"));
         if (Objects.nonNull(residence)){
         Building building = buildingMapper.fromDtoToEntity(buildingDto);
         building.setResidence(residenceRepository.findById(buildingDto.getResidenceId()).get());
@@ -61,7 +60,7 @@ public class BuildingService {
 
     public ResponseEntity<?> updateBuilder(Long buildingId, BuildingDto buildingDto) {
         Building building = buildingRepository.findById(buildingId).
-                orElseThrow(()->new NoSuchBuilding("The Building  does not exist"));
+                orElseThrow(()->new NoSuchBuildingException("The Building  does not exist"));
         if (Objects.nonNull(building)) {
             Residence residence = residenceRepository.findById(buildingDto.getResidenceId()).orElseGet(null);
             if (Objects.nonNull(residence)) {
@@ -91,7 +90,7 @@ public class BuildingService {
 
     public ResponseEntity<?> changeStatus(Long id, BuildingDto buildingDto){
         Building building = buildingRepository.findById(id).
-                orElseThrow(() -> new NoSuchBuilding("The Building in " + id + " does not exist"));
+                orElseThrow(() -> new NoSuchBuildingException("The Building in " + id + " does not exist"));
         if (Objects.nonNull(building)){
             building.setStatus(buildingDto.getStatus());
             buildingRepository.save(building);
@@ -105,7 +104,7 @@ public class BuildingService {
 
     public ResponseEntity<BuildingDto> deleteBuilding(Long id) {
         Building building = buildingRepository.findById(id).
-                orElseThrow(()->new NoSuchBuilding("The Building in "+id+" does not exist"));
+                orElseThrow(()->new NoSuchBuildingException("The Building in "+id+" does not exist"));
         if (Objects.nonNull(building)) {
             buildingRepository.deleteById(id);
             return ResponseEntity.status(OK).build();
@@ -132,7 +131,7 @@ public class BuildingService {
 
     public ResponseEntity<?> makeFirstPayment(Long buildingId, double firstPayment){
         Building building = buildingRepository.findById(buildingId)
-                .orElseThrow(() -> new NoSuchBuilding("The Building in " + buildingId + " does not exist"));
+                .orElseThrow(() -> new NoSuchBuildingException("The Building in " + buildingId + " does not exist"));
         if (Objects.nonNull(building)){
             double remainingAmount = building.getPrice() - firstPayment;
             if (remainingAmount < 0){
