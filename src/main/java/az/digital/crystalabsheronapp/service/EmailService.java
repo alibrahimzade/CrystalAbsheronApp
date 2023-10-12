@@ -17,16 +17,21 @@ public class EmailService {
 
     private final JavaMailSender javaMailSender;
 
-    public void sendMail(Mail mail) {
+    public void sendMail(String to,String subject ,String body ) {
 
         SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom("ibragimali56@gmail.com");
-        message.setTo(mail.getToMail());
-        message.setText(mail.getBody());
-        message.setSubject(mail.getSubject());
+//        message.setTo(mail.getToMail());
+//        message.setText(mail.getBody());
+//        message.setSubject(mail.getSubject());
+
+        message.setTo(to);
+        message.setText(subject);
+        message.setSubject(body);
 
         javaMailSender.send(message);
         log.info("Mail Sent Successfully...");
 
     }
+
 }
