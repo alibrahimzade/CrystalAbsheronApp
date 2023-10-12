@@ -8,7 +8,6 @@ import az.digital.crystalabsheronapp.dto.ContractDto;
 import az.digital.crystalabsheronapp.exceptions.NoSuchContractException;
 import az.digital.crystalabsheronapp.exceptions.NoSuchCustomerException;
 import az.digital.crystalabsheronapp.mapper.ContractMapper;
-import az.digital.crystalabsheronapp.wrapper.ContractWrapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -35,7 +34,7 @@ public class ContractService {
         return ResponseEntity.status(OK).body(contractMapper.fromEntityToDto(contractRepository.save(contract)));
     }
 
-    public ResponseEntity<ContractDto> updateContract(ContractDto contractDto) { // TODO: should be fixed when update customer_info_id/
+    public ResponseEntity<ContractDto> updateContract(ContractDto contractDto) {
         Contract contract = contractRepository.findById(contractDto.getId()).
                 orElseThrow(() -> new NoSuchContractException("This Contract does not exist"));
         CustomerInfo customerInfo = customerRepository.findById(contractDto.getCustomerInfoId()).
@@ -50,8 +49,9 @@ public class ContractService {
         return ResponseEntity.status(OK).body(contractMapper.fromEntityToDto(contract));
     }
 
-    public ResponseEntity<List<ContractWrapper>> getAllContracts() { //TODO: does not working.
-        return ResponseEntity.status(OK).body(contractRepository.getAllContracts());
+    public ResponseEntity<List<ContractDto>> getAllContracts() {
+        List<ContractDto> contractDtoList = contractRepository.findAll().stream().map(contractMapper::fromEntityToDto).toList();
+        return ResponseEntity.status(OK).body(contractDtoList);
     }
 
     public void deleteContract(Long contractId) {
