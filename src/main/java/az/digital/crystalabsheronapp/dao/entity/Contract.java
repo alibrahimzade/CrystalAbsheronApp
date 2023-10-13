@@ -14,10 +14,9 @@ import java.time.LocalDateTime;
                 "(c.id, c.detail,c.status,c.closeDate,c.creationTime,c.customerInfo)from Contract c ")
 
 @Entity
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter
-@Setter
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Table(name = "contract")

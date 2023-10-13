@@ -20,6 +20,8 @@ public class EmailController {
 
     @PostMapping("/sendMail")
     public void sendMail(@RequestBody Mail mail) {
-        emailService.sendMail(mail.getToMail(), mail.getSubject(), mail.getBody());
+        emailService.sendMail(mail);
     }
 }
+
+
