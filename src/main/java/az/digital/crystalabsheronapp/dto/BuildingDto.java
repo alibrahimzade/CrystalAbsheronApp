@@ -1,6 +1,6 @@
 package az.digital.crystalabsheronapp.dto;
 
-import az.digital.crystalabsheronapp.enums.Blocks;
+import az.digital.crystalabsheronapp.dao.entity.Blocks;
 import az.digital.crystalabsheronapp.enums.Payments;
 
 import az.digital.crystalabsheronapp.enums.Status;
@@ -9,7 +9,7 @@ import jakarta.persistence.Enumerated;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
-import java.time.LocalDate;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -44,8 +44,7 @@ public class BuildingDto {
     String description;
 
     String guarantor;
-    @Enumerated(EnumType.STRING)
-    Blocks block;
+    List<Blocks> block;
 
     Double interestRate;
 

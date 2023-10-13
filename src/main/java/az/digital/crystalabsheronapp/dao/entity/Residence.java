@@ -28,5 +28,5 @@ public class Residence {
     @OneToMany(mappedBy = "residence",
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY)
-    List<Building> buildings;
+    List<Blocks> blocks;
 }

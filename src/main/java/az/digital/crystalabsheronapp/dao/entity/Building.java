@@ -1,15 +1,11 @@
 package az.digital.crystalabsheronapp.dao.entity;
 
-import az.digital.crystalabsheronapp.enums.Blocks;
 import az.digital.crystalabsheronapp.enums.Payments;
 import az.digital.crystalabsheronapp.enums.Status;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
-
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 @Entity
 @AllArgsConstructor
@@ -51,8 +47,6 @@ public class Building {
 
     @Column(name = "zamin")
     String guarantor;
-    @Enumerated(EnumType.STRING)
-    Blocks block;
 
     Double interestRate;
 
@@ -60,7 +54,7 @@ public class Building {
     String period;
 
     @ManyToOne
-    @JoinColumn(name = "residence_id", nullable = false)
+    @JoinColumn(name = "block_id", nullable = false)
     @JsonIgnore
-    Residence residence;
+    Blocks blocks;
 }

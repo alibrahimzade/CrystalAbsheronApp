@@ -5,7 +5,6 @@ import az.digital.crystalabsheronapp.dao.entity.CustomerInfo;
 import az.digital.crystalabsheronapp.dao.repository.ContractRepository;
 import az.digital.crystalabsheronapp.dao.repository.CustomerRepository;
 import az.digital.crystalabsheronapp.dto.ContractDto;
-import az.digital.crystalabsheronapp.dto.CustomerInfoDto;
 import az.digital.crystalabsheronapp.dto.PaymentStatusDto;
 import az.digital.crystalabsheronapp.exceptions.NoSuchContractException;
 import az.digital.crystalabsheronapp.exceptions.NoSuchCustomerException;

@@ -1,7 +1,6 @@
 package az.digital.crystalabsheronapp.response;
 
-import az.digital.crystalabsheronapp.dao.entity.Building;
-import az.digital.crystalabsheronapp.enums.Blocks;
+import az.digital.crystalabsheronapp.dao.entity.Blocks;
 import az.digital.crystalabsheronapp.enums.Payments;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
