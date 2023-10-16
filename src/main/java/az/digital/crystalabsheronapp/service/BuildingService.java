@@ -64,7 +64,7 @@ public class BuildingService {
         if (Objects.nonNull(building)) {
             Residence residence = residenceRepository.findById(buildingDto.getResidenceId()).orElseGet(null);
             if (Objects.nonNull(residence)) {
-//                building.setResidence(residence);
+//                building.setBlocks();
                 building.setPrice(buildingDto.getPrice());
                 building.setPiecePrice(buildingDto.getPiecePrice());
                 building.setDebt(buildingDto.getDebt());
@@ -77,7 +77,6 @@ public class BuildingService {
                 building.setDone(buildingDto.getDone());
                 building.setDescription(buildingDto.getDescription());
                 building.setGuarantor(buildingDto.getGuarantor());
-//                building.setBlock(buildingDto.getBlock());
                 building.setInterestRate(buildingDto.getInterestRate());
                 building.setPeriod(buildingDto.getPeriod());
                 buildingRepository.save(building);
