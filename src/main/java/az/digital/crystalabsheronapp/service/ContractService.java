@@ -98,6 +98,7 @@ public class ContractService {
         CustomerInfo customerInfo = customerRepository.findById(contractDto.getCustomerInfoId()).
                 orElseThrow(() -> new NoSuchCustomerException("The Customer does not exist"));
         Contract updated = contractMapper.fromDtoToEntity(contractDto);
+        updated.setCustomerInfo(customerInfo);
         return ResponseEntity.ok(contractMapper.fromEntityToDto(contractRepository.save(updated)));
     }
     public ResponseEntity<ContractDto> getContractById(Long contractId) {
