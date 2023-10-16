@@ -52,5 +52,5 @@ public class BuildingDto {
 
 //    LocalDate createdAt;
 //    LocalDate endAt;
-    Long residenceId;
+    Long blockId;
 }
