@@ -1,14 +1,14 @@
 package az.digital.crystalabsheronapp.service;
 
+import az.digital.crystalabsheronapp.dao.entity.Block;
 import az.digital.crystalabsheronapp.dao.entity.Building;
-import az.digital.crystalabsheronapp.dao.entity.Residence;
+import az.digital.crystalabsheronapp.dao.repository.BlockRepository;
 import az.digital.crystalabsheronapp.dao.repository.BuildingRepository;
-import az.digital.crystalabsheronapp.dao.repository.ResidenceRepository;
 import az.digital.crystalabsheronapp.dto.BuildingDto;
 import az.digital.crystalabsheronapp.enums.Payments;
 import az.digital.crystalabsheronapp.enums.Status;
+import az.digital.crystalabsheronapp.exceptions.NoSuchBlocksException;
 import az.digital.crystalabsheronapp.exceptions.NoSuchBuildingException;
-import az.digital.crystalabsheronapp.exceptions.NoSuchResidenceException;
 import az.digital.crystalabsheronapp.mapper.BuildingMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -29,7 +29,7 @@ import static org.springframework.http.HttpStatus.OK;
 public class BuildingService {
 
     private final BuildingRepository buildingRepository;
-    private final ResidenceRepository residenceRepository;
+    private final BlockRepository blockRepository;
     private final BuildingMapper buildingMapper;
 
     public ResponseEntity<List<Building>> getAllBuilding() {
@@ -46,14 +46,14 @@ public class BuildingService {
     }
 
     public ResponseEntity<?> createBuilding(BuildingDto buildingDto) {
-        Residence residence = residenceRepository.findById(buildingDto.getResidenceId()).
-                orElseThrow(() -> new NoSuchResidenceException("The residence in " + buildingDto.getResidenceId() + " does not exist"));
-        if (Objects.nonNull(residence)){
-        Building building = buildingMapper.fromDtoToEntity(buildingDto);
-//        building.setResidence(residenceRepository.findById(buildingDto.getResidenceId()).get());
-        building.setStatus(Status.BOSH);
-        buildingRepository.save(building);
-        return ResponseEntity.status(OK).body("the building created");
+        Block block = blockRepository.findById(buildingDto.getBlockId()).
+                orElseThrow(() -> new NoSuchBlocksException("The block in " + buildingDto.getBlockId() + " does not exist"));
+        if (Objects.nonNull(block)) {
+            Building building = buildingMapper.fromDtoToEntity(buildingDto);
+            building.setBlock(blockRepository.findById(buildingDto.getBlockId()).get());
+            building.setStatus(Status.BOSH);
+            buildingRepository.save(building);
+            return ResponseEntity.status(OK).body("the building created");
         }
         return ResponseEntity.ok(NOT_FOUND);
     }
@@ -62,9 +62,10 @@ public class BuildingService {
         Building building = buildingRepository.findById(buildingId).
                 orElseThrow(()->new NoSuchBuildingException("The Building  does not exist"));
         if (Objects.nonNull(building)) {
-            Residence residence = residenceRepository.findById(buildingDto.getResidenceId()).orElseGet(null);
-            if (Objects.nonNull(residence)) {
-//                building.setResidence(residence);
+            Block block = blockRepository.findById(buildingDto.getBlockId()).
+                    orElseThrow(() -> new NoSuchBlocksException("The block does not exist"));
+            if (Objects.nonNull(block)) {
+                building.setBlock(block);
                 building.setPrice(buildingDto.getPrice());
                 building.setPiecePrice(buildingDto.getPiecePrice());
                 building.setDebt(buildingDto.getDebt());
@@ -82,7 +83,7 @@ public class BuildingService {
                 buildingRepository.save(building);
                 return ResponseEntity.ok(SAVING);
             }
-            return ResponseEntity.status(NOT_FOUND).body("This Residence does not exist.");
+            return ResponseEntity.status(NOT_FOUND).body("This Block does not exist.");
         }
         return ResponseEntity.status(NOT_FOUND).build();
     }
