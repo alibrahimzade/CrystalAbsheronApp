@@ -64,7 +64,7 @@ public class BuildingService {
         if (Objects.nonNull(building)) {
             Residence residence = residenceRepository.findById(buildingDto.getResidenceId()).orElseGet(null);
             if (Objects.nonNull(residence)) {
-//                building.setBlocks();
+//                building.setResidence(residence);
                 building.setPrice(buildingDto.getPrice());
                 building.setPiecePrice(buildingDto.getPiecePrice());
                 building.setDebt(buildingDto.getDebt());

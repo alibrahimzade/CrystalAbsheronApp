@@ -8,7 +8,7 @@ import lombok.experimental.FieldDefaults;
 @NoArgsConstructor
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class BlocksDto {
+public class BlockDto {
     Long id;
     String name;
     Long residenceId;

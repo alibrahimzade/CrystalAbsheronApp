@@ -1,6 +1,6 @@
 package az.digital.crystalabsheronapp.dto;
 
-import az.digital.crystalabsheronapp.dao.entity.Blocks;
+import az.digital.crystalabsheronapp.dao.entity.Block;
 import az.digital.crystalabsheronapp.enums.Payments;
 
 import az.digital.crystalabsheronapp.enums.Status;
@@ -44,7 +44,7 @@ public class BuildingDto {
     String description;
 
     String guarantor;
-    List<Blocks> block;
+    List<Block> block;
 
     Double interestRate;
 

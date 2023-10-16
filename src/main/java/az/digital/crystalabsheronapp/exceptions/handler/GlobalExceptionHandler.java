@@ -65,4 +65,11 @@ public class GlobalExceptionHandler {
         log.error("handleNoSuchCustomerNotFound {}", exception);
         return new ExceptionDto(NOT_FOUND.value(), exception.getMessage());
     }
+
+    @ExceptionHandler(NoSuchBlocksException.class)
+    @ResponseStatus(NOT_FOUND)
+    public ExceptionDto handleNoSuchCustomerNotFound(NoSuchBlocksException exception) {
+        log.error("handleNoSuchBlocksNotFound {}", exception);
+        return new ExceptionDto(NOT_FOUND.value(), exception.getMessage());
+    }
 }

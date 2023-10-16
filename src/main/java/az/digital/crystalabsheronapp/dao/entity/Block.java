@@ -15,7 +15,7 @@ import java.util.List;
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Table(name = "blocks")
-public class Blocks {
+public class Block {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;

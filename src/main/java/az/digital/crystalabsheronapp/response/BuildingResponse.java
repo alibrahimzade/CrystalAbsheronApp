@@ -1,6 +1,6 @@
 package az.digital.crystalabsheronapp.response;
 
-import az.digital.crystalabsheronapp.dao.entity.Blocks;
+import az.digital.crystalabsheronapp.dao.entity.Block;
 import az.digital.crystalabsheronapp.enums.Payments;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -34,7 +34,7 @@ public class BuildingResponse {
 
     String guarantor;
 
-    Blocks block;
+    Block block;
 
     Double interestRate;
 
