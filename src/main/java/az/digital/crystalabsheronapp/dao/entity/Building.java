@@ -56,5 +56,5 @@ public class Building {
     @ManyToOne
     @JoinColumn(name = "block_id", nullable = false)
     @JsonIgnore
-    Blocks blocks;
+    Block block;
 }
