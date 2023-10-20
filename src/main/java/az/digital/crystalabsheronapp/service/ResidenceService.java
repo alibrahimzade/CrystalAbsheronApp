@@ -48,7 +48,8 @@ public class ResidenceService {
     }
 
     public ResponseEntity<?> updateResidence(Long residenceId, ResidenceDto residenceDto) {
-        Residence residence = repository.findById(residenceId).orElseThrow(() -> new NoSuchResidenceException("The residence  does not exist"));
+        Residence residence = repository.findById(residenceId).
+                orElseThrow(() -> new NoSuchResidenceException("The residence  does not exist"));
         if (Objects.nonNull(residence)) {
             residence.setName(residenceDto.getName());
             repository.save(residence);

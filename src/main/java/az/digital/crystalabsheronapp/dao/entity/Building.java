@@ -56,5 +56,10 @@ public class Building {
     @ManyToOne
     @JoinColumn(name = "block_id", nullable = false)
     @JsonIgnore
-    Block block;
+    Block blocks;
+
+//    @ManyToOne
+//    @JoinColumn(name = "customer_info_id",nullable = false)
+//    @JsonIgnore
+//    CustomerInfo customerInfo;
 }

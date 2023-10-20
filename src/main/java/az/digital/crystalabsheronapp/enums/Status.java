@@ -1,6 +1,6 @@
 package az.digital.crystalabsheronapp.enums;
 
 public enum Status {
-    KREDIT, SATILIB, IPOTEKA, BOSH
+    KREDIT, SATILIB, IPOTEKA, BOSH, TAM_ODENILIB
 }
 
