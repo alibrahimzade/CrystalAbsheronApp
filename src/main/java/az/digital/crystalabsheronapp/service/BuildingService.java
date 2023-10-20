@@ -58,7 +58,7 @@ public class BuildingService {
         return ResponseEntity.ok(NOT_FOUND);
     }
 
-    public ResponseEntity<?> updateBuilder(Long buildingId, BuildingDto buildingDto) {
+    public ResponseEntity<?> updateBuilder(Long buildingId, BuildingDto buildingDto) { // TODO: ishlemir
         Building building = buildingRepository.findById(buildingId).
                 orElseThrow(()->new NoSuchBuildingException("The Building  does not exist"));
         if (Objects.nonNull(building)) {

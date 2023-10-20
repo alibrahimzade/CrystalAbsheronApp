@@ -20,7 +20,7 @@ public class BlockController {
         return blockService.getAll();
     }
 
-    @GetMapping("/getbyId/{id}")
+    @GetMapping("/getById/{id}")
     public ResponseEntity<BlockDto> getBlockById(@PathVariable(name = "id") Long id){
         return blockService.getBlocksById(id);
     }
