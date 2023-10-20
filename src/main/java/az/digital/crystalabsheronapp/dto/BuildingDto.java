@@ -24,9 +24,6 @@ public class BuildingDto {
 
     Double piecePrice;
     Double debt;
-
-    String houseOwner;
-
     Double area;
 
     Integer numberOfRooms;
@@ -44,7 +41,6 @@ public class BuildingDto {
     String description;
 
     String guarantor;
-    List<Block> block;
 
     Double interestRate;
 
@@ -53,4 +49,6 @@ public class BuildingDto {
 //    LocalDate createdAt;
 //    LocalDate endAt;
     Long blockId;
+
+//    Long customerInfoId;
 }

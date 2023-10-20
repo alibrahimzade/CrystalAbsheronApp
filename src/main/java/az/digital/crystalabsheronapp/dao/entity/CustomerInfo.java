@@ -27,8 +27,8 @@ public class CustomerInfo {
     Double amount;
     LocalDate paymentDate;
 
-
-    @OneToMany(mappedBy = "customerInfo",cascade = CascadeType.ALL)
-    List<Contract> contracts;
-
+//    @OneToMany(mappedBy = "customerInfo",
+//                fetch = FetchType.LAZY,
+//                cascade = CascadeType.ALL)
+//    List<Building> buildings;
 }

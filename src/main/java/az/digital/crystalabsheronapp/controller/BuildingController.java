@@ -53,10 +53,10 @@ public class BuildingController {
                                                 @PathVariable(name = "buildingId")Long id){
         return buildingService.makeMonthlyPayment(id,paymentAmount);
     }
-    @PostMapping("/firstPayment/{buildingId}")
-        public ResponseEntity<?> makeFirstPayment(@RequestParam double firstPayment,
-                                                    @PathVariable(name = "buildingId") Long id){
-            return buildingService.makeFirstPayment(id,firstPayment);
-        }
+//    @PostMapping("/firstPayment/{buildingId}")
+//        public ResponseEntity<?> makeFirstPayment(@RequestParam double firstPayment,
+//                                                    @PathVariable(name = "buildingId") Long id){
+//            return buildingService.makeFirstPayment(id,firstPayment);
+//        }
 
 }

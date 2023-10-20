@@ -50,7 +50,7 @@ public class BuildingService {
                 orElseThrow(() -> new NoSuchBlocksException("The block in " + buildingDto.getBlockId() + " does not exist"));
         if (Objects.nonNull(block)) {
             Building building = buildingMapper.fromDtoToEntity(buildingDto);
-            building.setBlock(blockRepository.findById(buildingDto.getBlockId()).get());
+            building.setBlocks(blockRepository.findById(buildingDto.getBlockId()).get());
             building.setStatus(Status.BOSH);
             buildingRepository.save(building);
             return ResponseEntity.status(OK).body("the building created");
@@ -65,11 +65,10 @@ public class BuildingService {
             Block block = blockRepository.findById(buildingDto.getBlockId()).
                     orElseThrow(() -> new NoSuchBlocksException("The block does not exist"));
             if (Objects.nonNull(block)) {
-                building.setBlock(block);
+                building.setBlocks(block);
                 building.setPrice(buildingDto.getPrice());
                 building.setPiecePrice(buildingDto.getPiecePrice());
                 building.setDebt(buildingDto.getDebt());
-                building.setHouseOwner(buildingDto.getHouseOwner());
                 building.setArea(buildingDto.getArea());
                 building.setNumberOfRooms(buildingDto.getNumberOfRooms());
                 building.setMonthlyPayment(buildingDto.getMonthlyPayment());
@@ -94,9 +93,9 @@ public class BuildingService {
         if (Objects.nonNull(building)){
             building.setStatus(buildingDto.getStatus());
             buildingRepository.save(building);
-            if (building.getStatus() == Status.KREDIT || building.getStatus() == Status.IPOTEKA ){
-
-            }
+//            if (building.getStatus() == Status.KREDIT || building.getStatus() == Status.IPOTEKA ){
+//
+//            }
             return ResponseEntity.ok(SAVING);
         }
         return ResponseEntity.status(NOT_FOUND).build();
@@ -112,35 +111,47 @@ public class BuildingService {
         return ResponseEntity.status(OK).build();
     }
 
-    public ResponseEntity<?> makeMonthlyPayment(Long buildingId , double monthlyPayment){
+    public ResponseEntity<BuildingDto> makeMonthlyPayment(Long buildingId , double monthlyPayment){
         Optional<Building> optionalBuilding = buildingRepository.findById(buildingId);
         if (optionalBuilding.isPresent()){
             Building building = optionalBuilding.get();
             double remainingDebt = building.getDebt() - monthlyPayment;
-            if (remainingDebt < 0){
+            if (remainingDebt <= 0){
                 remainingDebt = 0;
+                building.setStatus(Status.TAM_ODENILIB);
+
+                return ResponseEntity.status(OK).
+                        body(buildingMapper.fromEntityToDto(buildingRepository.save(building)));
             }
             building.setDebt(remainingDebt);
             building.setDone(Payments.DONE);
             buildingRepository.save(building);
-            return ResponseEntity.ok("Payment successfully made. Remaining debt is "+remainingDebt);
+            return ResponseEntity.status(OK).build();// TODO: Murad Success mesaj qaytar "Payment done successfully"
         }else {
             return ResponseEntity.status(NOT_FOUND).build();
         }
     }
 
-    public ResponseEntity<?> makeFirstPayment(Long buildingId, double firstPayment){
-        Building building = buildingRepository.findById(buildingId)
-                .orElseThrow(() -> new NoSuchBuildingException("The Building in " + buildingId + " does not exist"));
-        if (Objects.nonNull(building)){
-            double remainingAmount = building.getPrice() - firstPayment;
-            if (remainingAmount < 0){
-                remainingAmount = 0;
-            }
-            building.setDebt(remainingAmount);
-            buildingRepository.save(building);
-            return ResponseEntity.ok("FirstPayment successfully made. Remaining debt is "+remainingAmount);
-        }else
-            return ResponseEntity.status(NOT_FOUND).build();
+//    public ResponseEntity<?> makeFirstPayment(Long buildingId, double firstPayment){
+//        Building building = buildingRepository.findById(buildingId)
+//                .orElseThrow(() -> new NoSuchBuildingException("The Building in " + buildingId + " does not exist"));
+//        if (Objects.nonNull(building)){
+//            double remainingAmount = building.getPrice() - firstPayment;
+//            if (remainingAmount < 0){
+//                remainingAmount = 0;
+//            }
+//            building.setDebt(remainingAmount);
+//            buildingRepository.save(building);
+//            return ResponseEntity.ok("FirstPayment successfully made. Remaining debt is "+remainingAmount);
+//        }else
+//            return ResponseEntity.status(NOT_FOUND).build();
+//    }
+
+    public ResponseEntity<BuildingDto> soldBuilding(BuildingDto buildingDto){
+        Building building = buildingRepository.findById(buildingDto.getId())
+                .orElseThrow(() -> new NoSuchBuildingException("The Building in " + buildingDto.getId() + " does not exist"));
+        building.setStatus(Status.SATILIB);
+        return ResponseEntity.status(OK).body(buildingMapper.fromEntityToDto(buildingRepository.save(building)));
     }
+
 }
