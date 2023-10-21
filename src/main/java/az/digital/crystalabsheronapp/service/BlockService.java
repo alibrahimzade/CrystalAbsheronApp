@@ -49,10 +49,8 @@ public class BlockService {
     public ResponseEntity<BlockDto> updateBlock(BlockDto blockDto){ //TODO: ishlemir
         Block block = blockRepository.findById(blockDto.getId()).
                 orElseThrow(() -> new NoSuchBlocksException("The block does not exist"));
-
         Residence residence = residenceRepository.findById(blockDto.getResidenceId()).
                 orElseThrow(() -> new NoSuchResidenceException("The residence does not exist"));
-
         Block updated = blockMapper.fromDtoToEntity(blockDto);
         updated.setResidence(residence);
         return ResponseEntity.ok(blockMapper.fromEntityToDto(blockRepository.save(updated)));
