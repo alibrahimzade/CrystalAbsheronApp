@@ -15,6 +15,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -92,10 +93,11 @@ public class BuildingService {
                 orElseThrow(() -> new NoSuchBuildingException("The Building in " + id + " does not exist"));
         if (Objects.nonNull(building)){
             building.setStatus(buildingDto.getStatus());
+            if (building.getStatus() == Status.KREDIT || building.getStatus() == Status.IPOTEKA ){
+                buildingDto.setCreationTime(LocalDateTime.now());
+                buildingRepository.save(building);
+            }
             buildingRepository.save(building);
-//            if (building.getStatus() == Status.KREDIT || building.getStatus() == Status.IPOTEKA ){
-//
-//            }
             return ResponseEntity.ok(SAVING);
         }
         return ResponseEntity.status(NOT_FOUND).build();

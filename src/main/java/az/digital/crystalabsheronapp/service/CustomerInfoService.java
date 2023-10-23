@@ -6,7 +6,6 @@ import az.digital.crystalabsheronapp.dto.CustomerInfoDto;
 import az.digital.crystalabsheronapp.exceptions.NoSuchCustomerException;
 import az.digital.crystalabsheronapp.mapper.CustomerInfoMapper;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 

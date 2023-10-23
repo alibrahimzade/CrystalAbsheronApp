@@ -2,10 +2,14 @@ package az.digital.crystalabsheronapp.dao.entity;
 
 import az.digital.crystalabsheronapp.enums.Payments;
 import az.digital.crystalabsheronapp.enums.Status;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @AllArgsConstructor
@@ -52,6 +56,14 @@ public class Building {
 
     @Column(name = "odenish muddeti")
     String period;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @JsonFormat(pattern = "dd-mm-yyyy'T'HH:mm")
+    LocalDateTime creationTime;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @JsonFormat(pattern = "dd-mm-yyyy'T'HH:mm")
+    LocalDateTime endDate;
 
     @ManyToOne
     @JoinColumn(name = "block_id", nullable = false)

@@ -9,6 +9,7 @@ import jakarta.persistence.Enumerated;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Data
@@ -45,9 +46,6 @@ public class BuildingDto {
     Double interestRate;
 
     String period;
-
-//    LocalDate createdAt;
-//    LocalDate endAt;
     Long blockId;
 
 //    Long customerInfoId;
