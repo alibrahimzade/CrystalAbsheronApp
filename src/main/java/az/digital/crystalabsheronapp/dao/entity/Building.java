@@ -2,10 +2,14 @@ package az.digital.crystalabsheronapp.dao.entity;
 
 import az.digital.crystalabsheronapp.enums.Payments;
 import az.digital.crystalabsheronapp.enums.Status;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @AllArgsConstructor
@@ -58,8 +62,8 @@ public class Building {
     @JsonIgnore
     Block blocks;
 
-//    @ManyToOne
-//    @JoinColumn(name = "customer_info_id",nullable = false)
-//    @JsonIgnore
-//    CustomerInfo customerInfo;
+    @ManyToOne
+    @JoinColumn(name = "customer_info_id")
+    @JsonIgnore
+    CustomerInfo customerInfo;
 }

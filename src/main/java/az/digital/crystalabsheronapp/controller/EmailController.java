@@ -1,7 +1,10 @@
 package az.digital.crystalabsheronapp.controller;
 
+import az.digital.crystalabsheronapp.dao.entity.CustomerInfo;
 import az.digital.crystalabsheronapp.dao.entity.Mail;
+import az.digital.crystalabsheronapp.dto.CustomerInfoDto;
 import az.digital.crystalabsheronapp.service.EmailService;
+import az.digital.crystalabsheronapp.service.TransactionalEmailService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,11 +19,11 @@ import static javax.security.auth.callback.ConfirmationCallback.OK;
 @RequestMapping("/mail")
 public class EmailController {
 
-    private final EmailService emailService;
+    private final TransactionalEmailService transactionalEmailService;
 
     @PostMapping("/sendMail")
-    public void sendMail(@RequestBody Mail mail) {
-        emailService.sendMail(mail);
+    public void sendMail(@RequestBody CustomerInfoDto customerInfoDto) {
+        transactionalEmailService.warningMail(customerInfoDto);
     }
 }
 

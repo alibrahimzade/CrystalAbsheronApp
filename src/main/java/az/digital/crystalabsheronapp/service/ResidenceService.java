@@ -59,8 +59,8 @@ public class ResidenceService {
         return ResponseEntity.status(NOT_FOUND).body("This Residence does not exist");
     }
 
-    public ResponseEntity<?> deleteResidenceById(Long id) { //TODO: Doesn't working
-        Residence residence = repository.findById(id).
+    public ResponseEntity<?> deleteResidenceById(Long id) {
+        repository.findById(id).
                 orElseThrow(() -> new NoSuchResidenceException("The residence in " + id + " does not exist"));
             repository.deleteById(id);
             return ResponseEntity.ok(DELETED);

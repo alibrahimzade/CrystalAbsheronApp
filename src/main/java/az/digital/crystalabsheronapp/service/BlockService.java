@@ -23,25 +23,24 @@ public class BlockService {
     private final ResidenceRepository residenceRepository;
     private final BlockMapper blockMapper;
 
-    public ResponseEntity<List<BlockDto>> getAll(){// TODO: residence_id null qaytarir
+    public ResponseEntity<List<BlockDto>> getAll(){
         List<Block> all = blockRepository.findAll();
         return ResponseEntity.status(OK).body(blockMapper.fromEntityListToDtoList(all));
     }
 
-    public ResponseEntity<BlockDto> getBlocksById(Long id){ // TODO: residence_id null qaytarir
+    public ResponseEntity<BlockDto> getBlocksById(Long id){
         Block block = blockRepository.findById(id).
                 orElseThrow(() -> new NoSuchBlocksException("The block does not exist"));
 
         return ResponseEntity.status(OK).body(blockMapper.fromEntityToDto(block));
     }
 
-    public ResponseEntity<BlockDto> createBlock(BlockDto blockDto){ //TODO: residenceId null qaytarir amma database de oturur
+    public ResponseEntity<BlockDto> createBlock(BlockDto blockDto){
         Residence residence = residenceRepository.findById(blockDto.getResidenceId()).
                 orElseThrow(() -> new NoSuchResidenceException(
                         "The residence in " + blockDto.getResidenceId() + " does not exist")
                 );
         Block block = blockMapper.fromDtoToEntity(blockDto);
-//        block.setResidence(residenceRepository.findById(blockDto.getResidenceId()).get());
         block.setResidence(residence);
         return ResponseEntity.status(OK).body(blockMapper.fromEntityToDto(blockRepository.save(block)));
     }

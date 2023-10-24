@@ -9,6 +9,7 @@ import jakarta.persistence.Enumerated;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Data
@@ -46,9 +47,7 @@ public class BuildingDto {
 
     String period;
 
-//    LocalDate createdAt;
-//    LocalDate endAt;
     Long blockId;
 
-//    Long customerInfoId;
+    Long customerInfoId;
 }
