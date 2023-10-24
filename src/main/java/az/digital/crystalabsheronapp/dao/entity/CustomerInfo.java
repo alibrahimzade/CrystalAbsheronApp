@@ -25,21 +25,18 @@ public class CustomerInfo {
     Long customerId;
     String customerName;
     String customerSurname;
-    Integer paymentId;
     String clientEmail;
+    @Enumerated(EnumType.STRING)
     Payments status;
-    Double amount;
     @Temporal(TemporalType.TIMESTAMP)
     @JsonFormat(pattern = "dd-mm-yyyy'T'HH:mm")
-    LocalDateTime creationTime;
-
+    LocalDateTime soldDate;
     @Temporal(TemporalType.TIMESTAMP)
     @JsonFormat(pattern = "dd-mm-yyyy'T'HH:mm")
-    LocalDateTime endDate;
-    LocalDate paymentDate;
+    LocalDateTime paymentDate;
 
-//    @OneToMany(mappedBy = "customerInfo",
-//                fetch = FetchType.LAZY,
-//                cascade = CascadeType.ALL)
-//    List<Building> buildings;
+    @OneToMany(mappedBy = "customerInfo",
+                fetch = FetchType.LAZY,
+                cascade = CascadeType.ALL)
+    List<Building> buildings;
 }

@@ -57,21 +57,13 @@ public class Building {
     @Column(name = "odenish muddeti")
     String period;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    @JsonFormat(pattern = "dd-mm-yyyy'T'HH:mm")
-    LocalDateTime creationTime;
-
-    @Temporal(TemporalType.TIMESTAMP)
-    @JsonFormat(pattern = "dd-mm-yyyy'T'HH:mm")
-    LocalDateTime endDate;
-
     @ManyToOne
     @JoinColumn(name = "block_id", nullable = false)
     @JsonIgnore
     Block blocks;
 
-//    @ManyToOne
-//    @JoinColumn(name = "customer_info_id",nullable = false)
-//    @JsonIgnore
-//    CustomerInfo customerInfo;
+    @ManyToOne
+    @JoinColumn(name = "customer_info_id")
+    @JsonIgnore
+    CustomerInfo customerInfo;
 }

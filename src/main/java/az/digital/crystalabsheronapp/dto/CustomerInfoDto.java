@@ -1,6 +1,8 @@
 package az.digital.crystalabsheronapp.dto;
 
 import az.digital.crystalabsheronapp.enums.Payments;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
@@ -16,11 +18,9 @@ public class CustomerInfoDto {
     Long customerId;
     String customerName;
     String customerSurname;
-    Integer paymentId;
     String clientEmail;
+    @Enumerated(EnumType.STRING)
     Payments status;
-    Double amount;
-    LocalDateTime creationTime;
-    LocalDateTime endDate;
-    LocalDate paymentDate;
+    LocalDateTime soldDate;
+    LocalDateTime paymentDate;
 }

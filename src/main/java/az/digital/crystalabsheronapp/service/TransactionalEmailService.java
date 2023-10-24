@@ -37,9 +37,6 @@ public class TransactionalEmailService {
                 info.setCustomerName(customerInfoRepository.findById(save.getCustomerId()).get().getCustomerName());
                 info.setCustomerSurname(customerInfoRepository.findById(save.getCustomerId()).get().getCustomerSurname());
                 info.setClientEmail(customerInfoRepository.findById(save.getCustomerId()).get().getClientEmail());
-                info.setCreationTime(customerInfoRepository.findById(save.getCustomerId()).get().getCreationTime());
-                LocalDateTime paymentDueDate = save.getCreationTime();
-                LocalDateTime notificationDate = paymentDueDate.minusDays(3);
 
                 emailService.sendMail(info,"Ödəniş haqqında məlumat","Hörmətli"+save.getCustomerName()+". Ödənişinizə 3 gün qalıb.");
             }
@@ -52,7 +49,6 @@ public class TransactionalEmailService {
                 info.setCustomerName(customerInfoRepository.findById(save.getCustomerId()).get().getCustomerName());
                 info.setCustomerSurname(customerInfoRepository.findById(save.getCustomerId()).get().getCustomerSurname());
                 info.setClientEmail(customerInfoRepository.findById(save.getCustomerId()).get().getClientEmail());
-                info.setCreationTime(customerInfoRepository.findById(save.getCustomerId()).get().getCreationTime());
 
                 emailService.sendMail(info,"Ödəniş haqqında məlumat","Hörmətli"+save.getCustomerName()+". Bugün, ödəniş gününüzdür.");
             }
@@ -64,17 +60,28 @@ public class TransactionalEmailService {
                 info.setCustomerName(customerInfoRepository.findById(save.getCustomerId()).get().getCustomerName());
                 info.setCustomerSurname(customerInfoRepository.findById(save.getCustomerId()).get().getCustomerSurname());
                 info.setClientEmail(customerInfoRepository.findById(save.getCustomerId()).get().getClientEmail());
-                info.setCreationTime(customerInfoRepository.findById(save.getCustomerId()).get().getCreationTime());
 
                 emailService.sendMail(info,"Ödəniş haqqında məlumat","Hörmətli"+save.getCustomerName()+". Bugün, ödəniş günündən 3 gün keçib.");
             }
         };
 
-//        timer.schedule(threeDaysLeft,);
+//        timer.schedule(threeDaysLeft,27L * 24L * 60L * 60L * 1000L,30L * 24L * 60L * 60L * 1000L);
+//        timer.schedule(paymentDay,30L * 24L * 60L * 60L * 1000L,30L * 24L * 60L * 60L * 1000L);
+//        timer.schedule(threeDaysAfterPayment,33L * 24L * 60L * 60L * 1000L,30L * 24L * 60L * 60L * 1000L);
+
+        timer.schedule(threeDaysLeft,3000,3000);
+        timer.schedule(paymentDay,3000,3000);
+        timer.schedule(threeDaysAfterPayment,3000,3000);
     }
 
 
-    public void updatePaymentDueDate(Long customerId, LocalDateTime newDate){
-        customerInfoRepository.findById(customerId).orElseThrow(()-> new NoSuchCustomerException("The "));
+    public void updatePaymentDueDate(Long customerId){
+        CustomerInfo customerInfo = customerInfoRepository.findById(customerId).
+                orElseThrow(() -> new NoSuchCustomerException("The Customer does not exist"));
+
+        LocalDateTime currentDate = customerInfo.getPaymentDate();
+        LocalDateTime newDate = currentDate.plusMonths(1);
+        customerInfo.setPaymentDate(newDate);
+        customerInfoRepository.save(customerInfo);
     }
 }

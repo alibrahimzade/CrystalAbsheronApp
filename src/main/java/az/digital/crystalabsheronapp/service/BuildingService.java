@@ -93,10 +93,10 @@ public class BuildingService {
                 orElseThrow(() -> new NoSuchBuildingException("The Building in " + id + " does not exist"));
         if (Objects.nonNull(building)){
             building.setStatus(buildingDto.getStatus());
-            if (building.getStatus() == Status.KREDIT || building.getStatus() == Status.IPOTEKA ){
-                buildingDto.setCreationTime(LocalDateTime.now());
-                buildingRepository.save(building);
-            }
+//            if (building.getStatus() == Status.KREDIT || building.getStatus() == Status.IPOTEKA ){
+//                buildingDto.setCreationTime(LocalDateTime.now());
+//                buildingRepository.save(building);
+//            }
             buildingRepository.save(building);
             return ResponseEntity.ok(SAVING);
         }
