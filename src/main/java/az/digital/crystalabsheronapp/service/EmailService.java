@@ -36,7 +36,7 @@ public class EmailService {
     private final CustomerInfoRepository customerInfoRepository;
     private final CustomerInfoMapper customerInfoMapper;
 
-    @Scheduled(cron = "0 0 12 * * ?")// Cron expression to run the task at 4 PM every day
+    @Scheduled(cron = "0 0 4 * * ?")// Cron expression to run the task at 1 AM every day
     public void sendMonthlyEmail() {
         List<CustomerInfo> all = customerInfoRepository.findAll();
         List<CustomerInfoDto> customers = customerInfoMapper.fromEntityListToDtoList(all);
@@ -53,7 +53,6 @@ public class EmailService {
                         helper.setText("Dear "+customer.getCustomerName()
                                 +" "+customer.getCustomerSurname()+".Three days left for your payment");
                         javaMailSender.send(message);
-                        updatePaymentDueDate(customer);
                         log.info("Monthly email sent!");
                     }
                     if (currentDate.isEqual(paymentDate)){
@@ -71,7 +70,6 @@ public class EmailService {
                         helper.setText("Dear "+customer.getCustomerName()
                                 +" "+customer.getCustomerSurname()+".Payment is late for three days");
                         javaMailSender.send(message);
-                        updatePaymentDueDate(customer);
                         log.info("Email sent!");
                     }
 
