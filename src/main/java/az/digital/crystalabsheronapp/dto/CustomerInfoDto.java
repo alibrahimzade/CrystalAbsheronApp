@@ -21,6 +21,6 @@ public class CustomerInfoDto {
     String clientEmail;
     @Enumerated(EnumType.STRING)
     Payments status;
-    LocalDateTime soldDate;
-    LocalDateTime paymentDate;
+    LocalDate soldDate;
+    LocalDate paymentDate;
 }
