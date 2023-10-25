@@ -53,7 +53,6 @@ public class EmailService {
                         helper.setText("Dear "+customer.getCustomerName()
                                 +" "+customer.getCustomerSurname()+".Three days left for your payment");
                         javaMailSender.send(message);
-                        updatePaymentDueDate(customer);
                         log.info("Monthly email sent!");
                     }
                     if (currentDate.isEqual(paymentDate)){
@@ -71,10 +70,8 @@ public class EmailService {
                         helper.setText("Dear "+customer.getCustomerName()
                                 +" "+customer.getCustomerSurname()+".Payment is late for three days");
                         javaMailSender.send(message);
-                        updatePaymentDueDate(customer);
                         log.info("Email sent!");
                     }
-
                 }
             } catch (MessagingException e) {
                 e.printStackTrace();
