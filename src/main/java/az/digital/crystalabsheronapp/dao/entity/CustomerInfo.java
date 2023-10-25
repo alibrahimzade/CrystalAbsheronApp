@@ -28,12 +28,12 @@ public class CustomerInfo {
     String clientEmail;
     @Enumerated(EnumType.STRING)
     Payments status;
-    @Temporal(TemporalType.TIMESTAMP)
-    @JsonFormat(pattern = "dd-mm-yyyy'T'HH:mm")
-    LocalDateTime soldDate;
-    @Temporal(TemporalType.TIMESTAMP)
-    @JsonFormat(pattern = "dd-mm-yyyy'T'HH:mm")
-    LocalDateTime paymentDate;
+    @Temporal(TemporalType.DATE)
+    @JsonFormat(pattern = "dd-mm-yyyy")
+    LocalDate soldDate;
+    @Temporal(TemporalType.DATE)
+    @JsonFormat(pattern = "dd-mm-yyyy")
+    LocalDate paymentDate;
 
     @OneToMany(mappedBy = "customerInfo",
                 fetch = FetchType.LAZY,
