@@ -72,7 +72,6 @@ public class EmailService {
                         javaMailSender.send(message);
                         log.info("Email sent!");
                     }
-
                 }
             } catch (MessagingException e) {
                 e.printStackTrace();
