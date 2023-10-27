@@ -12,7 +12,7 @@ public class RabbitMQConsumer {
 
     @RabbitListener(queues = {"${rabbitmq.queue.name}"})
     public void consumer(String message){
-        LOGGER.info(String.format("Received message ->%s", message));
+        LOGGER.info(String.format("Received message -> %s", message));
 
     }
 }
