@@ -34,6 +34,7 @@ public class SecurityConfig {
                 .requestMatchers("/login").permitAll()
                 .requestMatchers("/contract").permitAll()
                 .requestMatchers("/block").permitAll()
+                .requestMatchers("/api/v1/**").permitAll()
                 .anyRequest()
                 .authenticated()
                 .and()

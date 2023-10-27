@@ -50,6 +50,12 @@ dependencies {
 
     implementation 'org.springframework.boot:spring-boot-starter-websocket'
     testImplementation 'org.awaitility:awaitility:4.2.0'
+    implementation 'com.rabbitmq:amqp-client:5.18.0'
+    implementation 'org.springframework.boot:spring-boot-starter-amqp:3.1.2'
+    implementation 'org.springframework.amqp:spring-amqp:3.0.5'
+
+
+
 
 }
 
