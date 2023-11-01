@@ -14,6 +14,4 @@ public interface ResidenceMapper {
     ResidenceDto fromEntityToDto(Residence residence);
 
     Residence fromDtoToEntity(ResidenceDto residenceDto);
-
-
 }

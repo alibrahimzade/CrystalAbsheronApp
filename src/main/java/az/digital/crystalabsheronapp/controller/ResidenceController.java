@@ -13,28 +13,29 @@ public class ResidenceController {
 
     private final ResidenceService residenceService;
 
-
     @GetMapping("/getResidence/{id}")
-    public ResponseEntity<?> getResidence(@PathVariable(name = "id") Long id){
+    public ResponseEntity<?> getResidence(@PathVariable(name = "id") Long id) {
         return ResponseEntity.ok(residenceService.findResidenceById(id));
     }
+
     @GetMapping("/getAllResidences")
-    public ResponseEntity<?> getAllResidences(){
+    public ResponseEntity<?> getAllResidences() {
         return ResponseEntity.ok(residenceService.findAllResidences());
     }
+
     @PostMapping("/addResidence")
-    public ResponseEntity<?> createResidence(@RequestBody ResidenceDto residenceDto){
+    public ResponseEntity<?> createResidence(@RequestBody ResidenceDto residenceDto) {
         return ResponseEntity.ok(residenceService.createResidence(residenceDto));
     }
 
     @PutMapping("/updateResidence/{id}")
     public ResponseEntity<?> updateResidence(@PathVariable(name = "id") Long id,
-                                             @RequestBody ResidenceDto residenceDto){
-        return ResponseEntity.ok(residenceService.updateResidence(id,residenceDto));
+                                             @RequestBody ResidenceDto residenceDto) {
+        return ResponseEntity.ok(residenceService.updateResidence(id, residenceDto));
     }
 
     @DeleteMapping("/deleteResidence/{id}")
-    public ResponseEntity<?> deleteResidence(@PathVariable(name = "id") Long id){
+    public ResponseEntity<?> deleteResidence(@PathVariable(name = "id") Long id) {
         return ResponseEntity.ok(residenceService.deleteResidenceById(id));
     }
 }

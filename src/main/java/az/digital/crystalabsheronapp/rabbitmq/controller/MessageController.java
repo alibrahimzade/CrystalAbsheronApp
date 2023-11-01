@@ -12,10 +12,10 @@ import org.springframework.web.bind.annotation.RestController;
 public class MessageController {
 
     private RabbitMQProducer producer;
-
     public MessageController(RabbitMQProducer producer) {
         this.producer = producer;
     }
+
     @GetMapping("/publish")
     public ResponseEntity<String> sendMessage(@RequestParam("message") String message){
         producer.sendMessage(message);

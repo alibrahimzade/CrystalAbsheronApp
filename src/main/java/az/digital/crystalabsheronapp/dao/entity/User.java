@@ -29,17 +29,11 @@ public class User implements UserDetails {
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
-
     String name;
-
     String surname;
-
     String fatherName;
-
     String fin;
-
     String password;
-
     @Enumerated(EnumType.STRING)
     Role role;
 

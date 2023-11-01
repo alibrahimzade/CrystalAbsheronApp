@@ -20,34 +20,22 @@ import java.util.List;
 public class BuildingDto {
 
     Long  id;
-
     Double price;
-
     Double piecePrice;
     Double debt;
     Double area;
-
     Integer numberOfRooms;
-
     Double monthlyPayment;
-
     Double firstPayment;
-
     Integer floor;
     @Enumerated(EnumType.STRING)
     Status status;
     @Enumerated(EnumType.STRING)
     Payments done;
-
     String description;
-
     String guarantor;
-
     Double interestRate;
-
     String period;
-
     Long blockId;
-
     Long customerInfoId;
 }

@@ -29,7 +29,6 @@ public class ResidenceService {
         if (Objects.nonNull(residence)) {
             return ResponseEntity.ok(residenceMapper.fromEntityToDto(residence));
         }
-
         return ResponseEntity.status(NOT_FOUND).build();
     }
 
@@ -55,7 +54,6 @@ public class ResidenceService {
             repository.save(residence);
             return ResponseEntity.ok(SAVING);
         }
-
         return ResponseEntity.status(NOT_FOUND).body("This Residence does not exist");
     }
 

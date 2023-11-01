@@ -12,29 +12,30 @@ import java.util.List;
 @RequiredArgsConstructor
 @RequestMapping("/customer")
 public class CustomerInfoController {
-
     private final CustomerInfoService customerInfoService;
+
     @GetMapping("/getAll")
-    public ResponseEntity<List<CustomerInfoDto>> getAllCustomers(){
+    public ResponseEntity<List<CustomerInfoDto>> getAllCustomers() {
         return customerInfoService.getAllCustomers();
     }
+
     @GetMapping("/getById/{id}")
-    public ResponseEntity<CustomerInfoDto> getCustomerById(@PathVariable(name = "id") Long id){
+    public ResponseEntity<CustomerInfoDto> getCustomerById(@PathVariable(name = "id") Long id) {
         return customerInfoService.getCustomerById(id);
     }
 
     @PostMapping("/create")
-    public ResponseEntity<CustomerInfoDto> createCustomer(@RequestBody CustomerInfoDto customerInfoDto){
+    public ResponseEntity<CustomerInfoDto> createCustomer(@RequestBody CustomerInfoDto customerInfoDto) {
         return customerInfoService.createCustomer(customerInfoDto);
     }
 
     @PutMapping("/update")
-    public ResponseEntity<CustomerInfoDto> updateCustomer(@RequestBody CustomerInfoDto customerInfoDto){
+    public ResponseEntity<CustomerInfoDto> updateCustomer(@RequestBody CustomerInfoDto customerInfoDto) {
         return customerInfoService.updateCustomer(customerInfoDto);
     }
 
     @DeleteMapping("/delete")
-    public ResponseEntity<CustomerInfoDto> deleteCustomer(@PathVariable(name = "id") Long id){
+    public ResponseEntity<CustomerInfoDto> deleteCustomer(@PathVariable(name = "id") Long id) {
         return customerInfoService.deleteCustomer(id);
     }
 }

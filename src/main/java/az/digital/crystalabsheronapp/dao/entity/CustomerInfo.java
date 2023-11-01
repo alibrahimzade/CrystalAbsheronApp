@@ -34,7 +34,6 @@ public class CustomerInfo {
     @Temporal(TemporalType.DATE)
     @JsonFormat(pattern = "dd-mm-yyyy")
     LocalDate paymentDate;
-
     @OneToMany(mappedBy = "customerInfo",
                 fetch = FetchType.LAZY,
                 cascade = CascadeType.ALL)

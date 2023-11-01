@@ -14,19 +14,14 @@ public class RabbitMQConfig {
 
     @Value("${rabbitmq.queue.name}")
     private String queue;
-
     @Value("${rabbitmq.queue.json.name}")
     private String jsonQueue;
-
     @Value("${rabbitmq.routing.key}")
     private String routingKey;
-
     @Value("${rabbitmq.routing.json.key}")
     private String routingJsonKey;
-
     @Value("${rabbitmq.exchange.name}")
     private String exchange;
-
 
     @Bean
     public Queue queue() {

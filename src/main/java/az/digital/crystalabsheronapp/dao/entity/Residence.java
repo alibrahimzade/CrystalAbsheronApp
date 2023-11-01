@@ -24,7 +24,6 @@ public class Residence {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
     String name;
-
     @OneToMany(mappedBy = "residence",
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY)

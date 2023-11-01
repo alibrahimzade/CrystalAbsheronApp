@@ -26,42 +26,29 @@ public class Building {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
     Double price;
-
     @Column(name = "1m qiymet")
     Double piecePrice;
     Double debt;
-
     String houseOwner;
-
     Double area;
-
     Integer numberOfRooms;
-
     Double monthlyPayment;
-
     Double firstPayment;
-
     Integer floor;
     @Enumerated(EnumType.STRING)
     Status status;
     @Enumerated(EnumType.STRING)
     Payments done;
-
     String description;
-
     @Column(name = "zamin")
     String guarantor;
-
     Double interestRate;
-
     @Column(name = "odenish muddeti")
     String period;
-
     @ManyToOne
     @JoinColumn(name = "block_id", nullable = false)
     @JsonIgnore
     Block blocks;
-
     @ManyToOne
     @JoinColumn(name = "customer_info_id")
     @JsonIgnore

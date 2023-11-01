@@ -16,27 +16,27 @@ public class BlockController {
     private final BlockService blockService;
 
     @GetMapping("/getAll")
-    public ResponseEntity<List<BlockDto>> getAllBlocks(){
+    public ResponseEntity<List<BlockDto>> getAllBlocks() {
         return blockService.getAll();
     }
 
     @GetMapping("/getById/{id}")
-    public ResponseEntity<BlockDto> getBlockById(@PathVariable(name = "id") Long id){
+    public ResponseEntity<BlockDto> getBlockById(@PathVariable(name = "id") Long id) {
         return blockService.getBlocksById(id);
     }
 
     @PostMapping("/create")
-    public ResponseEntity<BlockDto> createBlock(@RequestBody BlockDto blockDto){
+    public ResponseEntity<BlockDto> createBlock(@RequestBody BlockDto blockDto) {
         return blockService.createBlock(blockDto);
     }
 
     @PutMapping("/update")
-    public ResponseEntity<BlockDto> updateBlock(@RequestBody BlockDto blockDto){
+    public ResponseEntity<BlockDto> updateBlock(@RequestBody BlockDto blockDto) {
         return blockService.updateBlock(blockDto);
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<BlockDto> deleteBlock(@PathVariable(name = "id") Long id){
+    public ResponseEntity<BlockDto> deleteBlock(@PathVariable(name = "id") Long id) {
         return blockService.deleteBlock(id);
     }
-    }
+}
