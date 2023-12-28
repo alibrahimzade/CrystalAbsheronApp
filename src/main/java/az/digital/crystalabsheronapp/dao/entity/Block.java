@@ -24,7 +24,6 @@ public class Block {
             fetch = FetchType.LAZY,
             cascade = CascadeType.ALL)
     List<Building> buildings;
-
     @ManyToOne
     @JoinColumn(name = "residence_id", nullable = false)
     @JsonIgnore

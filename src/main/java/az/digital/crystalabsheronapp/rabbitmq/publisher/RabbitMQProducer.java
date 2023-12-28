@@ -11,15 +11,10 @@ public class RabbitMQProducer {
 
     @Value("${rabbitmq.exchange.name}")
     private String exchange;
-
     @Value("${rabbitmq.routing.key}")
     private String routingKey;
-
     private static final Logger LOGGER = LoggerFactory.getLogger(RabbitMQProducer.class);
-
-
     private RabbitTemplate rabbitTemplate;
-
 
     public RabbitMQProducer(RabbitTemplate rabbitTemplate) {
         this.rabbitTemplate = rabbitTemplate;

@@ -1,7 +1,6 @@
 package az.digital.crystalabsheronapp.service;
 
 import az.digital.crystalabsheronapp.dao.entity.CustomerInfo;
-import az.digital.crystalabsheronapp.dao.entity.Mail;
 import az.digital.crystalabsheronapp.dao.repository.CustomerInfoRepository;
 import az.digital.crystalabsheronapp.dto.CustomerInfoDto;
 import az.digital.crystalabsheronapp.exceptions.NoSuchCustomerException;
@@ -10,7 +9,6 @@ import jakarta.mail.MessagingException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -19,7 +17,6 @@ import org.springframework.stereotype.Service;
 import jakarta.mail.internet.MimeMessage;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 
 import static az.digital.crystalabsheronapp.enums.Payments.IS_LATE;
@@ -31,12 +28,11 @@ public class EmailService {
 
     @Value("${spring.mail.username}")
     private String fromEmail;
-
     private final JavaMailSender javaMailSender;
     private final CustomerInfoRepository customerInfoRepository;
     private final CustomerInfoMapper customerInfoMapper;
 
-    @Scheduled(cron = "0 0 12 * * ?")// Cron expression to run the task at 1 AM every day
+    @Scheduled(cron = "0 15 22 * * ?")// Run the task at 12 PM every day
     public void sendMonthlyEmail() {
         List<CustomerInfo> all = customerInfoRepository.findAll();
         List<CustomerInfoDto> customers = customerInfoMapper.fromEntityListToDtoList(all);

@@ -17,7 +17,6 @@ public class RegisterResponse {
     String fin;
     String password;
     Role role;
-
     public static RegisterResponse buildRegisterDto(User userEntity) {
         return RegisterResponse.builder()
                 .name(userEntity.getName())

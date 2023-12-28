@@ -9,6 +9,5 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class ExceptionDto {
     private Integer code;
-
     private String message;
 }

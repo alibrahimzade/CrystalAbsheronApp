@@ -1,6 +1,7 @@
 package az.digital.crystalabsheronapp.service;
 
 import az.digital.crystalabsheronapp.dao.entity.Block;
+import az.digital.crystalabsheronapp.dao.entity.Residence;
 import az.digital.crystalabsheronapp.dao.repository.BlockRepository;
 import az.digital.crystalabsheronapp.dao.repository.ResidenceRepository;
 import az.digital.crystalabsheronapp.dto.BlockDto;
@@ -84,30 +85,6 @@ public class BlockServiceTest {
                 assertThrows(NoSuchBlocksException.class, () -> blockService.getBlocksById(nonExistentBlockId));
         }
 
-//        @Test
-//        public void testCreateBlock() { TODO: does not work
-//                // Create a BlockDto for testing
-//                BlockDto blockDto = new BlockDto();
-//                blockDto.setId(1L); // Assuming a valid Residence ID
-//
-//                // Create a Residence for testing
-//                Residence residence = new Residence();
-//                when(residenceRepository.findById(1L)).thenReturn(Optional.of(residence));
-//
-//                // Mock the mapping of BlockDto to Block entity
-//                Block block = new Block();
-//                when(blockMapper.fromDtoToEntity(blockDto)).thenReturn(block);
-//
-//                // Mock the save operation in the repository
-//                when(blockRepository.save(any(Block.class))).thenReturn(block);
-//
-//                // Call the service method
-//                ResponseEntity<BlockDto> responseEntity = blockService.createBlock(blockDto);
-//
-//                // Assertions
-//                assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
-//                assertEquals(blockDto, responseEntity.getBody()); // Assuming your mapper correctly maps Block to BlockDto
-//        }
 
         @Test
         public void testCreateBlock_InvalidResidenceId() {
@@ -122,33 +99,33 @@ public class BlockServiceTest {
                 assertThrows(NoSuchResidenceException.class, () -> blockService.createBlock(blockDto));
         }
 
-//        @Test
-//        public void testUpdateBlock() { // TODO: does not work
-//                // Create a BlockDto for testing
-//                BlockDto blockDto = new BlockDto();
-//                blockDto.setId(1L); // Assuming a valid Block ID
-//                blockDto.setResidenceId(2L); // Assuming a valid Residence ID
-//
-//                // Create a Block and Residence for testing
-//                Block existingBlock = new Block();
-//                Residence residence = new Residence();
-//                when(blockRepository.findById(1L)).thenReturn(Optional.of(existingBlock));
-//                when(residenceRepository.findById(2L)).thenReturn(Optional.of(residence));
-//
-//                // Mock the mapping of BlockDto to Block entity
-//                Block updatedBlock = new Block();
-//                when(blockMapper.fromDtoToEntity(blockDto)).thenReturn(updatedBlock);
-//
-//                // Mock the save operation in the repository
-//                when(blockRepository.save(updatedBlock)).thenReturn(updatedBlock);
-//
-//                // Call the service method
-//                ResponseEntity<BlockDto> responseEntity = blockService.updateBlock(blockDto);
-//
-//                // Assertions
-//                assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
+        @Test
+        public void testUpdateBlock() { // TODO: does not work
+                // Create a BlockDto for testing
+                BlockDto blockDto = new BlockDto();
+                blockDto.setId(1L); // Assuming a valid Block ID
+                blockDto.setResidenceId(2L); // Assuming a valid Residence ID
+
+                // Create a Block and Residence for testing
+                Block existingBlock = new Block();
+                Residence residence = new Residence();
+                when(blockRepository.findById(1L)).thenReturn(Optional.of(existingBlock));
+                when(residenceRepository.findById(2L)).thenReturn(Optional.of(residence));
+
+                // Mock the mapping of BlockDto to Block entity
+                Block updatedBlock = new Block();
+                when(blockMapper.fromDtoToEntity(blockDto)).thenReturn(updatedBlock);
+
+                // Mock the save operation in the repository
+                when(blockRepository.save(updatedBlock)).thenReturn(updatedBlock);
+
+                // Call the service method
+                ResponseEntity<BlockDto> responseEntity = blockService.updateBlock(blockDto);
+
+                // Assertions
+                assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
 //                assertEquals(blockDto, responseEntity.getBody()); // Assuming your mapper correctly maps Block to BlockDto
-//        }
+        }
 
         @Test
         public void testUpdateBlock_BlockNotFound() {

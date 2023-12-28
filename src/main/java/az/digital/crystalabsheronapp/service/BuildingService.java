@@ -15,7 +15,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
+
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -93,10 +93,6 @@ public class BuildingService {
                 orElseThrow(() -> new NoSuchBuildingException("The Building in " + id + " does not exist"));
         if (Objects.nonNull(building)){
             building.setStatus(buildingDto.getStatus());
-//            if (building.getStatus() == Status.KREDIT || building.getStatus() == Status.IPOTEKA ){
-//                buildingDto.setCreationTime(LocalDateTime.now());
-//                buildingRepository.save(building);
-//            }
             buildingRepository.save(building);
             return ResponseEntity.ok(SAVING);
         }
@@ -133,21 +129,6 @@ public class BuildingService {
             return ResponseEntity.status(NOT_FOUND).build();
         }
     }
-
-//    public ResponseEntity<?> makeFirstPayment(Long buildingId, double firstPayment){
-//        Building building = buildingRepository.findById(buildingId)
-//                .orElseThrow(() -> new NoSuchBuildingException("The Building in " + buildingId + " does not exist"));
-//        if (Objects.nonNull(building)){
-//            double remainingAmount = building.getPrice() - firstPayment;
-//            if (remainingAmount < 0){
-//                remainingAmount = 0;
-//            }
-//            building.setDebt(remainingAmount);
-//            buildingRepository.save(building);
-//            return ResponseEntity.ok("FirstPayment successfully made. Remaining debt is "+remainingAmount);
-//        }else
-//            return ResponseEntity.status(NOT_FOUND).build();
-//    }
 
     public ResponseEntity<BuildingDto> soldBuilding(BuildingDto buildingDto){
         Building building = buildingRepository.findById(buildingDto.getId())

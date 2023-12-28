@@ -19,5 +19,4 @@ public interface CustomerInfoMapper {
     CustomerInfo fromDtoToEntity(CustomerInfoDto customerInfoDto);
 
     List<CustomerInfoDto> fromEntityListToDtoList(List<CustomerInfo> customerInfos);
-
 }

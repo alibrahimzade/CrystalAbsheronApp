@@ -1,6 +1,6 @@
 package az.digital.crystalabsheronapp.rabbitmq.controller;
 
-import az.digital.crystalabsheronapp.rabbitmq.dto.User;
+import az.digital.crystalabsheronapp.dto.UserDto;
 import az.digital.crystalabsheronapp.rabbitmq.publisher.RabbitMQJsonProducer;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,15 +13,13 @@ import org.springframework.web.bind.annotation.RestController;
 public class MessageJsonController {
 
     private RabbitMQJsonProducer jsonProducer;
-
-
     public MessageJsonController(RabbitMQJsonProducer jsonProducer) {
         this.jsonProducer = jsonProducer;
     }
 
     @PostMapping("/publish")
-    public ResponseEntity<String> sendJsonMessage(@RequestBody User user) {
+    public ResponseEntity<String> sendJsonMessage(@RequestBody UserDto user) {
         jsonProducer.sendJsonMessage(user);
-        return ResponseEntity.ok("Json message  sent to RabbitMQ...");
+        return ResponseEntity.ok("Json message sent to RabbitMQ...");
     }
 }

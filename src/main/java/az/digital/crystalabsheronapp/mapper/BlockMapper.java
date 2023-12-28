@@ -12,7 +12,6 @@ import java.util.List;
         unmappedSourcePolicy = ReportingPolicy.IGNORE)
 public interface BlockMapper {
 
-
     BlockDto fromEntityToDto(Block block);
 
     Block fromDtoToEntity(BlockDto blockDto);
