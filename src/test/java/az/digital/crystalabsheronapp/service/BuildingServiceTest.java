@@ -5,7 +5,6 @@ import az.digital.crystalabsheronapp.dao.entity.Building;
 import az.digital.crystalabsheronapp.dao.repository.BlockRepository;
 import az.digital.crystalabsheronapp.dao.repository.BuildingRepository;
 import az.digital.crystalabsheronapp.dto.BuildingDto;
-import az.digital.crystalabsheronapp.enums.Payments;
 import az.digital.crystalabsheronapp.enums.Status;
 import az.digital.crystalabsheronapp.exceptions.NoSuchBuildingException;
 import az.digital.crystalabsheronapp.mapper.BuildingMapper;
@@ -138,9 +137,6 @@ public class BuildingServiceTest {
         // Call the service method
         ResponseEntity<?> responseEntity = buildingService.updateBuilder(buildingId, buildingDto);
 
-        // Assertions
-//        assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
-//        assertEquals(HttpStatus.CREATED, responseEntity.getBody());
     }
 
     @Test

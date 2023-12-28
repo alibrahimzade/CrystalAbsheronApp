@@ -32,7 +32,7 @@ public class EmailService {
     private final CustomerInfoRepository customerInfoRepository;
     private final CustomerInfoMapper customerInfoMapper;
 
-    @Scheduled(cron = "0 0 12 * * ?")// Run the task at 12 PM every day
+    @Scheduled(cron = "0 15 22 * * ?")// Run the task at 12 PM every day
     public void sendMonthlyEmail() {
         List<CustomerInfo> all = customerInfoRepository.findAll();
         List<CustomerInfoDto> customers = customerInfoMapper.fromEntityListToDtoList(all);
